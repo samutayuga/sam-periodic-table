@@ -282,4 +282,39 @@ mod tests {
         assert_eq!(total, 118);
         assert_eq!(config.electrons_in(7, Subshell::P), 6);
     }
+
+    #[test]
+    fn spec_named_boundary_configs() {
+        // Light elements and the lanthanide/actinide boundary called out in the spec.
+        assert_eq!(
+            electron_configuration(6).unwrap().to_string(),
+            "1s2 2s2 2p2"
+        ); // C
+        assert_eq!(
+            electron_configuration(20).unwrap().to_string(),
+            "1s2 2s2 2p6 3s2 3p6 4s2"
+        ); // Ca
+        assert_eq!(
+            electron_configuration(21).unwrap().to_string(),
+            "1s2 2s2 2p6 3s2 3p6 3d1 4s2"
+        ); // Sc
+           // La (anomaly: 4f dropped, 5d1 added).
+        assert_eq!(
+            electron_configuration(57).unwrap().to_string(),
+            "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6 5d1 6s2"
+        );
+        // Lr (deliberately NOT in the anomaly table — naive fill yields 6d1 7s2).
+        assert_eq!(
+            electron_configuration(103).unwrap().to_string(),
+            "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d1 7s2"
+        );
+    }
+
+    #[test]
+    fn unpaired_electrons_follows_hunds_rule() {
+        assert_eq!(electron_configuration(7).unwrap().unpaired_electrons(), 3); // N: 2p3
+        assert_eq!(electron_configuration(10).unwrap().unpaired_electrons(), 0); // Ne: filled
+        assert_eq!(electron_configuration(26).unwrap().unpaired_electrons(), 4);
+        // Fe: 3d6
+    }
 }

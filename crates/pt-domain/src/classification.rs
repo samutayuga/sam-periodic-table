@@ -187,6 +187,21 @@ mod tests {
     }
 
     #[test]
+    fn lanthanide_actinide_boundary() {
+        // La (57): block from naive fill is f; period 6; group 3 by convention.
+        assert_eq!(block(57).unwrap(), Block::F);
+        assert_eq!(period(57).unwrap(), 6);
+        assert_eq!(group(57).unwrap(), 3);
+        assert_eq!(category(57).unwrap(), Category::Lanthanide);
+        // Lr (103): excluded from the anomaly table, so naive fill ends at 6d -> d-block,
+        // period 7, group 3 (6d1 + 7s2), categorized as an actinide.
+        assert_eq!(block(103).unwrap(), Block::D);
+        assert_eq!(period(103).unwrap(), 7);
+        assert_eq!(group(103).unwrap(), 3);
+        assert_eq!(category(103).unwrap(), Category::Actinide);
+    }
+
+    #[test]
     fn invalid_z_errors() {
         assert_eq!(block(0), Err(DomainError::InvalidAtomicNumber(0)));
         assert_eq!(period(200), Err(DomainError::InvalidAtomicNumber(200)));
