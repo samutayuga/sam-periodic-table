@@ -24,6 +24,53 @@ impl From<Subshell> for Block {
     }
 }
 
+/// A heuristic element category. Not authoritative — see the spec caveats.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Category {
+    AlkaliMetal,
+    AlkalineEarthMetal,
+    TransitionMetal,
+    PostTransitionMetal,
+    Metalloid,
+    ReactiveNonmetal,
+    NobleGas,
+    Halogen,
+    Lanthanide,
+    Actinide,
+}
+
+const METALLOIDS: [u8; 7] = [5, 14, 32, 33, 51, 52, 85]; // B Si Ge As Sb Te At
+const POST_TRANSITION: [u8; 12] = [13, 31, 49, 50, 81, 82, 83, 84, 113, 114, 115, 116];
+
+/// Best-effort element category derived from group, block, and atomic number.
+pub fn category(z: u8) -> Result<Category, DomainError> {
+    validate_z(z)?;
+    let g = group(z)?;
+    let b = block(z)?;
+    let c = if (57..=71).contains(&z) {
+        Category::Lanthanide
+    } else if (89..=103).contains(&z) {
+        Category::Actinide
+    } else if g == 18 {
+        Category::NobleGas
+    } else if g == 1 && z != 1 {
+        Category::AlkaliMetal
+    } else if g == 2 {
+        Category::AlkalineEarthMetal
+    } else if g == 17 {
+        Category::Halogen
+    } else if b == Block::D {
+        Category::TransitionMetal
+    } else if METALLOIDS.contains(&z) {
+        Category::Metalloid
+    } else if POST_TRANSITION.contains(&z) {
+        Category::PostTransitionMetal
+    } else {
+        Category::ReactiveNonmetal
+    };
+    Ok(c)
+}
+
 fn validate_z(z: u8) -> Result<(), DomainError> {
     if (1..=118).contains(&z) {
         Ok(())
@@ -122,5 +169,21 @@ mod tests {
         assert_eq!(block(0), Err(DomainError::InvalidAtomicNumber(0)));
         assert_eq!(period(200), Err(DomainError::InvalidAtomicNumber(200)));
         assert_eq!(group(0), Err(DomainError::InvalidAtomicNumber(0)));
+    }
+
+    #[test]
+    fn categories() {
+        assert_eq!(category(1).unwrap(), Category::ReactiveNonmetal); // H
+        assert_eq!(category(2).unwrap(), Category::NobleGas); // He
+        assert_eq!(category(11).unwrap(), Category::AlkaliMetal); // Na
+        assert_eq!(category(12).unwrap(), Category::AlkalineEarthMetal); // Mg
+        assert_eq!(category(26).unwrap(), Category::TransitionMetal); // Fe
+        assert_eq!(category(5).unwrap(), Category::Metalloid); // B
+        assert_eq!(category(17).unwrap(), Category::Halogen); // Cl
+        assert_eq!(category(10).unwrap(), Category::NobleGas); // Ne
+        assert_eq!(category(13).unwrap(), Category::PostTransitionMetal); // Al
+        assert_eq!(category(8).unwrap(), Category::ReactiveNonmetal); // O
+        assert_eq!(category(60).unwrap(), Category::Lanthanide); // Nd
+        assert_eq!(category(92).unwrap(), Category::Actinide); // U
     }
 }
