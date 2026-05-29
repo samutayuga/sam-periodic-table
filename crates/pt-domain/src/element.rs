@@ -65,7 +65,11 @@ mod tests {
             state: StateOfMatter::Gas,
             discovery_year: Some(1766),
             discoverer: Some("Henry Cavendish".into()),
-            isotopes: vec![Isotope { mass_number: 1, relative_mass: 1.007825, abundance: 0.999885 }],
+            isotopes: vec![Isotope {
+                mass_number: 1,
+                relative_mass: 1.007825,
+                abundance: 0.999885,
+            }],
         };
         assert_eq!(e.symbol, "H");
         assert_eq!(e.state, StateOfMatter::Gas);

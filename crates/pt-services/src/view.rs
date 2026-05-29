@@ -75,7 +75,11 @@ mod tests {
             state: StateOfMatter::Solid,
             discovery_year: None,
             discoverer: None,
-            isotopes: vec![Isotope { mass_number: 56, relative_mass: 55.934936, abundance: 1.0 }],
+            isotopes: vec![Isotope {
+                mass_number: 56,
+                relative_mass: 55.934936,
+                abundance: 1.0,
+            }],
         }
     }
 
@@ -88,6 +92,9 @@ mod tests {
         assert_eq!(view.block(), Block::D);
         assert_eq!(view.category(), Category::TransitionMetal);
         assert_eq!(view.state_at(300.0), Some(StateOfMatter::Solid));
-        assert_eq!(view.electron_configuration().to_string(), "1s2 2s2 2p6 3s2 3p6 3d6 4s2");
+        assert_eq!(
+            view.electron_configuration().to_string(),
+            "1s2 2s2 2p6 3s2 3p6 3d6 4s2"
+        );
     }
 }

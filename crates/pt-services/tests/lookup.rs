@@ -49,5 +49,8 @@ fn computed_atomic_mass_matches_stored_for_chlorine() {
     let t = table();
     let cl = t.by_symbol("Cl").unwrap();
     let computed = cl.computed_atomic_mass().unwrap();
-    assert!((computed - cl.element().atomic_mass).abs() < 0.05, "got {computed}");
+    assert!(
+        (computed - cl.element().atomic_mass).abs() < 0.05,
+        "got {computed}"
+    );
 }

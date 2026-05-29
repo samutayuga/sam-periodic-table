@@ -55,11 +55,16 @@ impl ElementOutput {
 }
 
 fn fmt_opt(value: Option<f64>) -> String {
-    value.map(|v| v.to_string()).unwrap_or_else(|| "—".to_string())
+    value
+        .map(|v| v.to_string())
+        .unwrap_or_else(|| "—".to_string())
 }
 
 pub fn print_text(o: &ElementOutput) {
-    println!("{} ({}) — atomic number {}", o.name, o.symbol, o.atomic_number);
+    println!(
+        "{} ({}) — atomic number {}",
+        o.name, o.symbol, o.atomic_number
+    );
     println!("  atomic mass:       {}", o.atomic_mass);
     println!("  mass number:       {}", o.mass_number);
     println!("  electron config:   {}", o.electron_configuration);
@@ -80,6 +85,9 @@ pub fn print_text(o: &ElementOutput) {
             .join(", ")
     );
     let discoverer = o.discoverer.clone().unwrap_or_else(|| "—".to_string());
-    let year = o.discovery_year.map(|y| y.to_string()).unwrap_or_else(|| "—".to_string());
+    let year = o
+        .discovery_year
+        .map(|y| y.to_string())
+        .unwrap_or_else(|| "—".to_string());
     println!("  discovered:        {discoverer} ({year})");
 }

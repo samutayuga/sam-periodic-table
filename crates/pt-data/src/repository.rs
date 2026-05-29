@@ -64,7 +64,12 @@ impl ElementRepository {
             }
         }
 
-        Ok(Self { elements, by_number, by_symbol, by_name })
+        Ok(Self {
+            elements,
+            by_number,
+            by_symbol,
+            by_name,
+        })
     }
 
     pub fn get_by_atomic_number(&self, z: u8) -> Option<&Element> {
@@ -72,11 +77,15 @@ impl ElementRepository {
     }
 
     pub fn get_by_symbol(&self, symbol: &str) -> Option<&Element> {
-        self.by_symbol.get(&symbol.to_lowercase()).map(|&i| &self.elements[i])
+        self.by_symbol
+            .get(&symbol.to_lowercase())
+            .map(|&i| &self.elements[i])
     }
 
     pub fn get_by_name(&self, name: &str) -> Option<&Element> {
-        self.by_name.get(&name.to_lowercase()).map(|&i| &self.elements[i])
+        self.by_name
+            .get(&name.to_lowercase())
+            .map(|&i| &self.elements[i])
     }
 
     pub fn iter(&self) -> impl Iterator<Item = &Element> {

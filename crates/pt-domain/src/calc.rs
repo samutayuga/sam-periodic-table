@@ -44,8 +44,16 @@ mod tests {
 
     fn chlorine_isotopes() -> Vec<Isotope> {
         vec![
-            Isotope { mass_number: 35, relative_mass: 34.968853, abundance: 0.7576 },
-            Isotope { mass_number: 37, relative_mass: 36.965903, abundance: 0.2424 },
+            Isotope {
+                mass_number: 35,
+                relative_mass: 34.968853,
+                abundance: 0.7576,
+            },
+            Isotope {
+                mass_number: 37,
+                relative_mass: 36.965903,
+                abundance: 0.2424,
+            },
         ]
     }
 

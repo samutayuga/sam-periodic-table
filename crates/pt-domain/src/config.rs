@@ -144,7 +144,11 @@ pub(crate) fn aufbau_fill(z: u8) -> Vec<Orbital> {
         }
         let cap = subshell.capacity() as u16;
         let electrons = remaining.min(cap);
-        orbitals.push(Orbital { n, subshell, electrons: electrons as u8 });
+        orbitals.push(Orbital {
+            n,
+            subshell,
+            electrons: electrons as u8,
+        });
         remaining -= electrons;
     }
     orbitals
@@ -184,10 +188,17 @@ pub fn electron_configuration(z: u8) -> Result<ElectronConfiguration, DomainErro
     let mut orbitals = aufbau_fill(z);
     if let Some(overrides) = anomalies(z) {
         for &(n, subshell, electrons) in overrides {
-            if let Some(orbital) = orbitals.iter_mut().find(|o| o.n == n && o.subshell == subshell) {
+            if let Some(orbital) = orbitals
+                .iter_mut()
+                .find(|o| o.n == n && o.subshell == subshell)
+            {
                 orbital.electrons = electrons;
             } else {
-                orbitals.push(Orbital { n, subshell, electrons });
+                orbitals.push(Orbital {
+                    n,
+                    subshell,
+                    electrons,
+                });
             }
         }
         orbitals.retain(|o| o.electrons > 0);
@@ -201,8 +212,14 @@ mod tests {
 
     #[test]
     fn invalid_atomic_number_errors() {
-        assert_eq!(electron_configuration(0), Err(DomainError::InvalidAtomicNumber(0)));
-        assert_eq!(electron_configuration(119), Err(DomainError::InvalidAtomicNumber(119)));
+        assert_eq!(
+            electron_configuration(0),
+            Err(DomainError::InvalidAtomicNumber(0))
+        );
+        assert_eq!(
+            electron_configuration(119),
+            Err(DomainError::InvalidAtomicNumber(119))
+        );
     }
 
     #[test]
@@ -221,7 +238,10 @@ mod tests {
 
     #[test]
     fn neon_is_filled() {
-        assert_eq!(electron_configuration(10).unwrap().to_string(), "1s2 2s2 2p6");
+        assert_eq!(
+            electron_configuration(10).unwrap().to_string(),
+            "1s2 2s2 2p6"
+        );
     }
 
     #[test]
