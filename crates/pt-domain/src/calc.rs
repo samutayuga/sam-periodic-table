@@ -69,6 +69,22 @@ mod tests {
     }
 
     #[test]
+    fn zero_total_abundance_yields_none() {
+        let isotopes = vec![Isotope {
+            mass_number: 1,
+            relative_mass: 1.0,
+            abundance: 0.0,
+        }];
+        assert_eq!(atomic_mass_from_isotopes(&isotopes), None);
+    }
+
+    #[test]
+    fn isotope_validation_false_without_isotopes() {
+        let element = sample(35.45, vec![]);
+        assert!(!isotope_mass_matches(&element, 0.01));
+    }
+
+    #[test]
     fn isotope_validation_matches_stored() {
         let element = sample(35.45, chlorine_isotopes());
         assert!(isotope_mass_matches(&element, 0.01));

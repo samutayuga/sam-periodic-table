@@ -20,17 +20,15 @@ impl ElementRepository {
     /// Loads every `*.yaml`/`*.yml` file in `dir`, validates, and indexes them.
     pub fn load_from_dir(dir: impl AsRef<Path>) -> Result<Self, DataError> {
         let dir = dir.as_ref();
-        let entries = std::fs::read_dir(dir).map_err(|e| DataError::Io {
+        let to_io_err = |e: std::io::Error| DataError::Io {
             path: dir.display().to_string(),
             source: e,
-        })?;
+        };
+        let entries = std::fs::read_dir(dir).map_err(&to_io_err)?;
 
         let mut elements = Vec::new();
         for entry in entries {
-            let entry = entry.map_err(|e| DataError::Io {
-                path: dir.display().to_string(),
-                source: e,
-            })?;
+            let entry = entry.map_err(&to_io_err)?;
             let path = entry.path();
             let is_yaml = path
                 .extension()
@@ -186,5 +184,84 @@ mod tests {
         let repo = ElementRepository::load_from_dir(dir.path()).unwrap();
         let numbers: Vec<u8> = repo.iter().map(|e| e.atomic_number).collect();
         assert_eq!(numbers, vec![1, 26]);
+    }
+
+    #[test]
+    fn nonexistent_dir_is_io_error() {
+        let err = ElementRepository::load_from_dir("/no/such/directory/here").unwrap_err();
+        assert!(matches!(err, DataError::Io { .. }));
+    }
+
+    #[test]
+    fn skips_non_yaml_files() {
+        let dir = tempdir().unwrap();
+        write_element(
+            &dir,
+            "hydrogen.yaml",
+            "atomic_number: 1\nname: Hydrogen\nsymbol: H\natomic_mass: 1.008\nmass_number: 1\nstate: gas\n",
+        );
+        write_element(&dir, "notes.txt", "this file should be ignored\n");
+        let repo = ElementRepository::load_from_dir(dir.path()).unwrap();
+        assert_eq!(repo.len(), 1);
+    }
+
+    #[test]
+    fn duplicate_symbol_errors() {
+        let dir = tempdir().unwrap();
+        write_element(
+            &dir,
+            "a.yaml",
+            "atomic_number: 1\nname: Aaa\nsymbol: X\natomic_mass: 1.0\nmass_number: 1\nstate: gas\n",
+        );
+        write_element(
+            &dir,
+            "b.yaml",
+            "atomic_number: 2\nname: Bbb\nsymbol: X\natomic_mass: 2.0\nmass_number: 2\nstate: gas\n",
+        );
+        let err = ElementRepository::load_from_dir(dir.path()).unwrap_err();
+        assert!(matches!(err, DataError::DuplicateSymbol(_)));
+    }
+
+    #[test]
+    fn duplicate_name_errors() {
+        let dir = tempdir().unwrap();
+        write_element(
+            &dir,
+            "a.yaml",
+            "atomic_number: 1\nname: Same\nsymbol: Aa\natomic_mass: 1.0\nmass_number: 1\nstate: gas\n",
+        );
+        write_element(
+            &dir,
+            "b.yaml",
+            "atomic_number: 2\nname: Same\nsymbol: Bb\natomic_mass: 2.0\nmass_number: 2\nstate: gas\n",
+        );
+        let err = ElementRepository::load_from_dir(dir.path()).unwrap_err();
+        assert!(matches!(err, DataError::DuplicateName(_)));
+    }
+
+    #[test]
+    fn malformed_file_aborts_load() {
+        let dir = tempdir().unwrap();
+        write_element(&dir, "broken.yaml", "this: : : not valid yaml");
+        let err = ElementRepository::load_from_dir(dir.path()).unwrap_err();
+        assert!(matches!(err, DataError::Parse { .. }));
+    }
+
+    #[test]
+    fn is_empty_is_false_for_loaded_repo() {
+        let dir = two_element_dir();
+        let repo = ElementRepository::load_from_dir(dir.path()).unwrap();
+        assert!(!repo.is_empty());
+    }
+
+    #[test]
+    fn global_repository_initializes_once() {
+        let dir = two_element_dir();
+        let repo = init_global(dir.path()).unwrap();
+        assert_eq!(repo.len(), 2);
+        // A second call returns the cached repository and ignores the new path.
+        let again = init_global("/no/such/directory").unwrap();
+        assert_eq!(again.len(), 2);
+        assert_eq!(global().map(|r| r.len()), Some(2));
     }
 }

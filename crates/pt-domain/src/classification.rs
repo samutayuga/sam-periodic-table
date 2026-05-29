@@ -124,14 +124,14 @@ pub fn oxidation_states(z: u8) -> Result<OxidationStates, DomainError> {
     let states = match group(z)? {
         1 => vec![1],
         2 => vec![2],
+        3..=12 => vec![2, 3],
         13 => vec![3],
         14 => vec![-4, 4],
         15 => vec![-3, 3, 5],
         16 => vec![-2],
         17 => vec![-1],
-        18 => vec![0],
-        3..=12 => vec![2, 3],
-        _ => vec![],
+        // group 18 (noble gases); the catch-all is unreachable for valid groups.
+        _ => vec![0],
     };
     Ok(OxidationStates(states))
 }
@@ -230,7 +230,11 @@ mod tests {
         assert_eq!(oxidation_states(12).unwrap().0, vec![2]); // Mg
         assert_eq!(oxidation_states(8).unwrap().0, vec![-2]); // O
         assert_eq!(oxidation_states(9).unwrap().0, vec![-1]); // F
-        assert_eq!(oxidation_states(10).unwrap().0, vec![0]); // Ne
+        assert_eq!(oxidation_states(10).unwrap().0, vec![0]); // Ne (group 18, catch-all)
         assert_eq!(oxidation_states(5).unwrap().0, vec![3]); // B
+        assert_eq!(oxidation_states(6).unwrap().0, vec![-4, 4]); // C (group 14)
+        assert_eq!(oxidation_states(7).unwrap().0, vec![-3, 3, 5]); // N (group 15)
+        assert_eq!(oxidation_states(26).unwrap().0, vec![2, 3]); // Fe (transition)
+        assert!(oxidation_states(0).is_err());
     }
 }

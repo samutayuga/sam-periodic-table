@@ -54,3 +54,23 @@ fn computed_atomic_mass_matches_stored_for_chlorine() {
         "got {computed}"
     );
 }
+
+#[test]
+fn by_mass_picks_nearest_when_several_match() {
+    let t = table();
+    // Near 64 u, both Cu (~63.5) and Zn (~65.4) fall within ±2.0; Cu is nearer.
+    let v = t.by_atomic_mass(64.0, 2.0).expect("match within tolerance");
+    assert_eq!(v.element().symbol, "Cu");
+}
+
+#[test]
+fn all_iterates_every_element() {
+    let t = table();
+    assert_eq!(t.all().count(), 118);
+}
+
+#[test]
+fn load_failure_surfaces_a_service_error() {
+    let err = PeriodicTable::load("/no/such/directory").unwrap_err();
+    assert!(!err.to_string().is_empty());
+}

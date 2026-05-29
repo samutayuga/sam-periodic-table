@@ -6,6 +6,7 @@ use pt_data::ElementRepository;
 use std::path::Path;
 
 /// Loaded periodic table providing lookups by several keys.
+#[derive(Debug)]
 pub struct PeriodicTable {
     repo: ElementRepository,
 }

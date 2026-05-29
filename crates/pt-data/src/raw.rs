@@ -142,4 +142,15 @@ isotopes:
         let err = raw.into_element("h.yaml").unwrap_err();
         assert!(matches!(err, DataError::Validation { .. }));
     }
+
+    #[test]
+    fn parses_liquid_state_with_all_fields() {
+        let yaml = "atomic_number: 35\nname: Bromine\nsymbol: Br\natomic_mass: 79.904\nmass_number: 79\nmelting_point: 265.8\nboiling_point: 332.0\ndensity: 3.122\nelectronegativity: 2.96\nstate: liquid\ndiscovery_year: 1826\ndiscoverer: Antoine Balard\nisotopes:\n  - { mass_number: 79, relative_mass: 78.918338, abundance: 0.5069 }\n  - { mass_number: 81, relative_mass: 80.916290, abundance: 0.4931 }\n";
+        let raw: RawElement = serde_yaml_ng::from_str(yaml).unwrap();
+        let element = raw.into_element("bromine.yaml").unwrap();
+        assert_eq!(element.state, StateOfMatter::Liquid);
+        assert_eq!(element.discoverer.as_deref(), Some("Antoine Balard"));
+        assert_eq!(element.melting_point, Some(265.8));
+        assert_eq!(element.isotopes.len(), 2);
+    }
 }
