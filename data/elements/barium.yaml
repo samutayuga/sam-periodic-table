@@ -1,0 +1,20 @@
+atomic_number: 56
+name: Barium
+symbol: Ba
+atomic_mass: 137.327
+mass_number: 138
+melting_point: 1000.0
+boiling_point: 2118.0
+density: 3.51
+electronegativity: 0.89
+state: solid
+discovery_year: 1808
+discoverer: Humphry Davy
+isotopes:
+  - { mass_number: 130, relative_mass: 129.906321, abundance: 0.00106 }
+  - { mass_number: 132, relative_mass: 131.905061, abundance: 0.00101 }
+  - { mass_number: 134, relative_mass: 133.904508, abundance: 0.02417 }
+  - { mass_number: 135, relative_mass: 134.905689, abundance: 0.06592 }
+  - { mass_number: 136, relative_mass: 135.904576, abundance: 0.07854 }
+  - { mass_number: 137, relative_mass: 136.905827, abundance: 0.11232 }
+  - { mass_number: 138, relative_mass: 137.905247, abundance: 0.71698 }

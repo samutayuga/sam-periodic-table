@@ -1,0 +1,17 @@
+atomic_number: 24
+name: Chromium
+symbol: Cr
+atomic_mass: 51.996
+mass_number: 52
+melting_point: 2180.0
+boiling_point: 2944.0
+density: 7.15
+electronegativity: 1.66
+state: solid
+discovery_year: 1798
+discoverer: Louis Nicolas Vauquelin
+isotopes:
+  - { mass_number: 50, relative_mass: 49.946044, abundance: 0.04345 }
+  - { mass_number: 52, relative_mass: 51.940508, abundance: 0.83789 }
+  - { mass_number: 53, relative_mass: 52.940650, abundance: 0.09501 }
+  - { mass_number: 54, relative_mass: 53.938880, abundance: 0.02365 }

@@ -1,0 +1,12 @@
+atomic_number: 79
+name: Gold
+symbol: Au
+atomic_mass: 196.9666
+mass_number: 197
+melting_point: 1337.33
+boiling_point: 3129.0
+density: 19.3
+electronegativity: 2.54
+state: solid
+isotopes:
+  - { mass_number: 197, relative_mass: 196.966569, abundance: 1.0 }

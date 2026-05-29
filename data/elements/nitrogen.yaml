@@ -1,0 +1,15 @@
+atomic_number: 7
+name: Nitrogen
+symbol: N
+atomic_mass: 14.007
+mass_number: 14
+melting_point: 63.15
+boiling_point: 77.355
+density: 0.001251
+electronegativity: 3.04
+state: gas
+discovery_year: 1772
+discoverer: Daniel Rutherford
+isotopes:
+  - { mass_number: 14, relative_mass: 14.003074, abundance: 0.99632 }
+  - { mass_number: 15, relative_mass: 15.000109, abundance: 0.00368 }

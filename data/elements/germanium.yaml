@@ -1,0 +1,18 @@
+atomic_number: 32
+name: Germanium
+symbol: Ge
+atomic_mass: 72.630
+mass_number: 74
+melting_point: 1211.4
+boiling_point: 3106.0
+density: 5.323
+electronegativity: 2.01
+state: solid
+discovery_year: 1886
+discoverer: Clemens Winkler
+isotopes:
+  - { mass_number: 70, relative_mass: 69.924247, abundance: 0.2057 }
+  - { mass_number: 72, relative_mass: 71.922076, abundance: 0.2745 }
+  - { mass_number: 73, relative_mass: 72.923459, abundance: 0.0775 }
+  - { mass_number: 74, relative_mass: 73.921178, abundance: 0.3650 }
+  - { mass_number: 76, relative_mass: 75.921403, abundance: 0.0773 }

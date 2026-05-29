@@ -1,0 +1,10 @@
+atomic_number: 111
+name: Roentgenium
+symbol: Rg
+atomic_mass: 282.0
+mass_number: 282
+state: solid
+discovery_year: 1994
+discoverer: Peter Armbruster
+isotopes:
+  - { mass_number: 282, relative_mass: 282.169120, abundance: 1.0 }

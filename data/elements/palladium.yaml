@@ -1,0 +1,19 @@
+atomic_number: 46
+name: Palladium
+symbol: Pd
+atomic_mass: 106.42
+mass_number: 108
+melting_point: 1828.05
+boiling_point: 3236.0
+density: 12.023
+electronegativity: 2.20
+state: solid
+discovery_year: 1803
+discoverer: William Hyde Wollaston
+isotopes:
+  - { mass_number: 102, relative_mass: 101.905609, abundance: 0.0102 }
+  - { mass_number: 104, relative_mass: 103.904036, abundance: 0.1114 }
+  - { mass_number: 105, relative_mass: 104.905085, abundance: 0.2233 }
+  - { mass_number: 106, relative_mass: 105.903486, abundance: 0.2733 }
+  - { mass_number: 108, relative_mass: 107.903892, abundance: 0.2646 }
+  - { mass_number: 110, relative_mass: 109.905153, abundance: 0.1172 }

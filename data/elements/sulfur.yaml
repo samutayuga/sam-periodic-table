@@ -1,0 +1,15 @@
+atomic_number: 16
+name: Sulfur
+symbol: S
+atomic_mass: 32.06
+mass_number: 32
+melting_point: 388.36
+boiling_point: 717.8
+density: 2.067
+electronegativity: 2.58
+state: solid
+isotopes:
+  - { mass_number: 32, relative_mass: 31.972071, abundance: 0.9499 }
+  - { mass_number: 33, relative_mass: 32.971459, abundance: 0.0075 }
+  - { mass_number: 34, relative_mass: 33.967867, abundance: 0.0425 }
+  - { mass_number: 36, relative_mass: 35.967081, abundance: 0.0001 }

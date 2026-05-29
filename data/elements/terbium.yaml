@@ -1,0 +1,14 @@
+atomic_number: 65
+name: Terbium
+symbol: Tb
+atomic_mass: 158.9254
+mass_number: 159
+melting_point: 1629.0
+boiling_point: 3503.0
+density: 8.23
+electronegativity: 1.20
+state: solid
+discovery_year: 1843
+discoverer: Carl Gustaf Mosander
+isotopes:
+  - { mass_number: 159, relative_mass: 158.925347, abundance: 1.0 }

@@ -1,0 +1,15 @@
+atomic_number: 31
+name: Gallium
+symbol: Ga
+atomic_mass: 69.723
+mass_number: 69
+melting_point: 302.9146
+boiling_point: 2673.0
+density: 5.91
+electronegativity: 1.81
+state: solid
+discovery_year: 1875
+discoverer: Paul Emile Lecoq de Boisbaudran
+isotopes:
+  - { mass_number: 69, relative_mass: 68.925574, abundance: 0.60108 }
+  - { mass_number: 71, relative_mass: 70.924701, abundance: 0.39892 }

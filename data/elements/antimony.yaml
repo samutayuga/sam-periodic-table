@@ -1,0 +1,13 @@
+atomic_number: 51
+name: Antimony
+symbol: Sb
+atomic_mass: 121.760
+mass_number: 121
+melting_point: 903.78
+boiling_point: 1860.0
+density: 6.685
+electronegativity: 2.05
+state: solid
+isotopes:
+  - { mass_number: 121, relative_mass: 120.903816, abundance: 0.5721 }
+  - { mass_number: 123, relative_mass: 122.904214, abundance: 0.4279 }

@@ -1,0 +1,18 @@
+atomic_number: 36
+name: Krypton
+symbol: Kr
+atomic_mass: 83.798
+mass_number: 84
+melting_point: 115.79
+boiling_point: 119.93
+density: 0.003749
+state: gas
+discovery_year: 1898
+discoverer: William Ramsay
+isotopes:
+  - { mass_number: 78, relative_mass: 77.920365, abundance: 0.00355 }
+  - { mass_number: 80, relative_mass: 79.916379, abundance: 0.02286 }
+  - { mass_number: 82, relative_mass: 81.913484, abundance: 0.11593 }
+  - { mass_number: 83, relative_mass: 82.914136, abundance: 0.11500 }
+  - { mass_number: 84, relative_mass: 83.911507, abundance: 0.56987 }
+  - { mass_number: 86, relative_mass: 85.910611, abundance: 0.17279 }

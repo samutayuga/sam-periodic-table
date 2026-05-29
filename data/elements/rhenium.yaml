@@ -1,0 +1,15 @@
+atomic_number: 75
+name: Rhenium
+symbol: Re
+atomic_mass: 186.207
+mass_number: 187
+melting_point: 3459.0
+boiling_point: 5869.0
+density: 21.02
+electronegativity: 1.9
+state: solid
+discovery_year: 1925
+discoverer: Ida Tacke
+isotopes:
+  - { mass_number: 185, relative_mass: 184.952955, abundance: 0.3740 }
+  - { mass_number: 187, relative_mass: 186.955753, abundance: 0.6260 }

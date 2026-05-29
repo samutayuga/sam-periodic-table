@@ -1,0 +1,21 @@
+atomic_number: 54
+name: Xenon
+symbol: Xe
+atomic_mass: 131.293
+mass_number: 132
+melting_point: 161.4
+boiling_point: 165.051
+density: 0.005894
+state: gas
+discovery_year: 1898
+discoverer: William Ramsay
+isotopes:
+  - { mass_number: 124, relative_mass: 123.905893, abundance: 0.000952 }
+  - { mass_number: 126, relative_mass: 125.904274, abundance: 0.000890 }
+  - { mass_number: 128, relative_mass: 127.903531, abundance: 0.019102 }
+  - { mass_number: 129, relative_mass: 128.904779, abundance: 0.264006 }
+  - { mass_number: 130, relative_mass: 129.903508, abundance: 0.040710 }
+  - { mass_number: 131, relative_mass: 130.905082, abundance: 0.212324 }
+  - { mass_number: 132, relative_mass: 131.904154, abundance: 0.269086 }
+  - { mass_number: 134, relative_mass: 133.905395, abundance: 0.104357 }
+  - { mass_number: 136, relative_mass: 135.907219, abundance: 0.088573 }

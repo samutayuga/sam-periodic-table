@@ -1,0 +1,14 @@
+atomic_number: 21
+name: Scandium
+symbol: Sc
+atomic_mass: 44.9559
+mass_number: 45
+melting_point: 1814.0
+boiling_point: 3109.0
+density: 2.985
+electronegativity: 1.36
+state: solid
+discovery_year: 1879
+discoverer: Lars Fredrik Nilson
+isotopes:
+  - { mass_number: 45, relative_mass: 44.955912, abundance: 1.0 }

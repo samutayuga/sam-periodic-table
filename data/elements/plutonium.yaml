@@ -1,0 +1,14 @@
+atomic_number: 94
+name: Plutonium
+symbol: Pu
+atomic_mass: 244.0
+mass_number: 244
+melting_point: 912.5
+boiling_point: 3501.0
+density: 19.816
+electronegativity: 1.28
+state: solid
+discovery_year: 1940
+discoverer: Glenn T. Seaborg
+isotopes:
+  - { mass_number: 244, relative_mass: 244.064204, abundance: 1.0 }

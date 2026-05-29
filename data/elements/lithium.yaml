@@ -1,0 +1,15 @@
+atomic_number: 3
+name: Lithium
+symbol: Li
+atomic_mass: 6.94
+mass_number: 7
+melting_point: 453.65
+boiling_point: 1603.0
+density: 0.534
+electronegativity: 0.98
+state: solid
+discovery_year: 1817
+discoverer: Johan August Arfwedson
+isotopes:
+  - { mass_number: 6, relative_mass: 6.015123, abundance: 0.0759 }
+  - { mass_number: 7, relative_mass: 7.016003, abundance: 0.9241 }

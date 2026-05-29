@@ -1,0 +1,13 @@
+atomic_number: 47
+name: Silver
+symbol: Ag
+atomic_mass: 107.8682
+mass_number: 107
+melting_point: 1234.93
+boiling_point: 2435.0
+density: 10.49
+electronegativity: 1.93
+state: solid
+isotopes:
+  - { mass_number: 107, relative_mass: 106.905097, abundance: 0.51839 }
+  - { mass_number: 109, relative_mass: 108.904752, abundance: 0.48161 }

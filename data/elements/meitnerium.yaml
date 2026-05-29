@@ -1,0 +1,10 @@
+atomic_number: 109
+name: Meitnerium
+symbol: Mt
+atomic_mass: 278.0
+mass_number: 278
+state: solid
+discovery_year: 1982
+discoverer: Peter Armbruster
+isotopes:
+  - { mass_number: 278, relative_mass: 278.156310, abundance: 1.0 }

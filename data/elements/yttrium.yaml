@@ -1,0 +1,14 @@
+atomic_number: 39
+name: Yttrium
+symbol: Y
+atomic_mass: 88.9058
+mass_number: 89
+melting_point: 1795.0
+boiling_point: 3618.0
+density: 4.472
+electronegativity: 1.22
+state: solid
+discovery_year: 1794
+discoverer: Johan Gadolin
+isotopes:
+  - { mass_number: 89, relative_mass: 88.905848, abundance: 1.0 }

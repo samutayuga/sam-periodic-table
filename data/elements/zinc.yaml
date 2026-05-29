@@ -1,0 +1,16 @@
+atomic_number: 30
+name: Zinc
+symbol: Zn
+atomic_mass: 65.38
+mass_number: 64
+melting_point: 692.68
+boiling_point: 1180.0
+density: 7.14
+electronegativity: 1.65
+state: solid
+isotopes:
+  - { mass_number: 64, relative_mass: 63.929142, abundance: 0.4917 }
+  - { mass_number: 66, relative_mass: 65.926033, abundance: 0.2773 }
+  - { mass_number: 67, relative_mass: 66.927128, abundance: 0.0404 }
+  - { mass_number: 68, relative_mass: 67.924844, abundance: 0.1845 }
+  - { mass_number: 70, relative_mass: 69.925319, abundance: 0.0061 }

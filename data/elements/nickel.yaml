@@ -1,0 +1,18 @@
+atomic_number: 28
+name: Nickel
+symbol: Ni
+atomic_mass: 58.6934
+mass_number: 58
+melting_point: 1728.0
+boiling_point: 3186.0
+density: 8.908
+electronegativity: 1.91
+state: solid
+discovery_year: 1751
+discoverer: Axel Fredrik Cronstedt
+isotopes:
+  - { mass_number: 58, relative_mass: 57.935343, abundance: 0.68077 }
+  - { mass_number: 60, relative_mass: 59.930786, abundance: 0.26223 }
+  - { mass_number: 61, relative_mass: 60.931056, abundance: 0.01140 }
+  - { mass_number: 62, relative_mass: 61.928345, abundance: 0.03634 }
+  - { mass_number: 64, relative_mass: 63.927967, abundance: 0.00926 }

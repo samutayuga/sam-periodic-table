@@ -1,0 +1,20 @@
+atomic_number: 62
+name: Samarium
+symbol: Sm
+atomic_mass: 150.36
+mass_number: 152
+melting_point: 1345.0
+boiling_point: 2173.0
+density: 7.52
+electronegativity: 1.17
+state: solid
+discovery_year: 1879
+discoverer: Paul Emile Lecoq de Boisbaudran
+isotopes:
+  - { mass_number: 144, relative_mass: 143.912001, abundance: 0.0307 }
+  - { mass_number: 147, relative_mass: 146.914898, abundance: 0.1499 }
+  - { mass_number: 148, relative_mass: 147.914823, abundance: 0.1124 }
+  - { mass_number: 149, relative_mass: 148.917185, abundance: 0.1382 }
+  - { mass_number: 150, relative_mass: 149.917276, abundance: 0.0738 }
+  - { mass_number: 152, relative_mass: 151.919732, abundance: 0.2675 }
+  - { mass_number: 154, relative_mass: 153.922209, abundance: 0.2275 }

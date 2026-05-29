@@ -1,0 +1,14 @@
+atomic_number: 87
+name: Francium
+symbol: Fr
+atomic_mass: 223.0
+mass_number: 223
+melting_point: 300.0
+boiling_point: 950.0
+density: 1.87
+electronegativity: 0.7
+state: solid
+discovery_year: 1939
+discoverer: Marguerite Perey
+isotopes:
+  - { mass_number: 223, relative_mass: 223.019736, abundance: 1.0 }

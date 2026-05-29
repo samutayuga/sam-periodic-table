@@ -1,0 +1,14 @@
+atomic_number: 91
+name: Protactinium
+symbol: Pa
+atomic_mass: 231.0359
+mass_number: 231
+melting_point: 1841.0
+boiling_point: 4300.0
+density: 15.37
+electronegativity: 1.5
+state: solid
+discovery_year: 1917
+discoverer: Otto Hahn
+isotopes:
+  - { mass_number: 231, relative_mass: 231.035884, abundance: 1.0 }

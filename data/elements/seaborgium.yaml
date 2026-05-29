@@ -1,0 +1,10 @@
+atomic_number: 106
+name: Seaborgium
+symbol: Sg
+atomic_mass: 269.0
+mass_number: 269
+state: solid
+discovery_year: 1974
+discoverer: Albert Ghiorso
+isotopes:
+  - { mass_number: 269, relative_mass: 269.128630, abundance: 1.0 }

@@ -1,0 +1,15 @@
+atomic_number: 10
+name: Neon
+symbol: Ne
+atomic_mass: 20.1797
+mass_number: 20
+melting_point: 24.56
+boiling_point: 27.07
+density: 0.0009002
+state: gas
+discovery_year: 1898
+discoverer: William Ramsay
+isotopes:
+  - { mass_number: 20, relative_mass: 19.99244, abundance: 0.9048 }
+  - { mass_number: 21, relative_mass: 20.993847, abundance: 0.0027 }
+  - { mass_number: 22, relative_mass: 21.991385, abundance: 0.0925 }

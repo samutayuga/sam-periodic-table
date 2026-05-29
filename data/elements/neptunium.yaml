@@ -1,0 +1,14 @@
+atomic_number: 93
+name: Neptunium
+symbol: Np
+atomic_mass: 237.0
+mass_number: 237
+melting_point: 917.0
+boiling_point: 4273.0
+density: 20.45
+electronegativity: 1.36
+state: solid
+discovery_year: 1940
+discoverer: Edwin McMillan
+isotopes:
+  - { mass_number: 237, relative_mass: 237.048173, abundance: 1.0 }

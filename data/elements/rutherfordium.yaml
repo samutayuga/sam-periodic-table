@@ -1,0 +1,10 @@
+atomic_number: 104
+name: Rutherfordium
+symbol: Rf
+atomic_mass: 267.0
+mass_number: 267
+state: solid
+discovery_year: 1964
+discoverer: Joint Institute for Nuclear Research
+isotopes:
+  - { mass_number: 267, relative_mass: 267.121780, abundance: 1.0 }

@@ -1,0 +1,15 @@
+atomic_number: 35
+name: Bromine
+symbol: Br
+atomic_mass: 79.904
+mass_number: 79
+melting_point: 265.8
+boiling_point: 332.0
+density: 3.1028
+electronegativity: 2.96
+state: liquid
+discovery_year: 1826
+discoverer: Antoine Jerome Balard
+isotopes:
+  - { mass_number: 79, relative_mass: 78.918338, abundance: 0.5069 }
+  - { mass_number: 81, relative_mass: 80.916291, abundance: 0.4931 }

@@ -1,0 +1,14 @@
+atomic_number: 85
+name: Astatine
+symbol: At
+atomic_mass: 210.0
+mass_number: 210
+melting_point: 575.0
+boiling_point: 610.0
+density: 7.0
+electronegativity: 2.2
+state: solid
+discovery_year: 1940
+discoverer: Dale R. Corson
+isotopes:
+  - { mass_number: 210, relative_mass: 209.987148, abundance: 1.0 }

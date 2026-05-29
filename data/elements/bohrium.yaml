@@ -1,0 +1,10 @@
+atomic_number: 107
+name: Bohrium
+symbol: Bh
+atomic_mass: 270.0
+mass_number: 270
+state: solid
+discovery_year: 1981
+discoverer: Peter Armbruster
+isotopes:
+  - { mass_number: 270, relative_mass: 270.133360, abundance: 1.0 }

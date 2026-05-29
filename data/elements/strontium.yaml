@@ -1,0 +1,17 @@
+atomic_number: 38
+name: Strontium
+symbol: Sr
+atomic_mass: 87.62
+mass_number: 88
+melting_point: 1050.0
+boiling_point: 1655.0
+density: 2.64
+electronegativity: 0.95
+state: solid
+discovery_year: 1808
+discoverer: Humphry Davy
+isotopes:
+  - { mass_number: 84, relative_mass: 83.913425, abundance: 0.0056 }
+  - { mass_number: 86, relative_mass: 85.909261, abundance: 0.0986 }
+  - { mass_number: 87, relative_mass: 86.908878, abundance: 0.0700 }
+  - { mass_number: 88, relative_mass: 87.905613, abundance: 0.8258 }

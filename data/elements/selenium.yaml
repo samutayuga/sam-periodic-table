@@ -1,0 +1,19 @@
+atomic_number: 34
+name: Selenium
+symbol: Se
+atomic_mass: 78.971
+mass_number: 80
+melting_point: 494.0
+boiling_point: 958.0
+density: 4.809
+electronegativity: 2.55
+state: solid
+discovery_year: 1817
+discoverer: Jons Jacob Berzelius
+isotopes:
+  - { mass_number: 74, relative_mass: 73.922476, abundance: 0.0086 }
+  - { mass_number: 76, relative_mass: 75.919214, abundance: 0.0923 }
+  - { mass_number: 77, relative_mass: 76.919914, abundance: 0.0760 }
+  - { mass_number: 78, relative_mass: 77.917309, abundance: 0.2369 }
+  - { mass_number: 80, relative_mass: 79.916521, abundance: 0.4980 }
+  - { mass_number: 82, relative_mass: 81.916699, abundance: 0.0882 }

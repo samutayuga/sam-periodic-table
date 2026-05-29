@@ -1,0 +1,14 @@
+atomic_number: 53
+name: Iodine
+symbol: I
+atomic_mass: 126.9045
+mass_number: 127
+melting_point: 386.85
+boiling_point: 457.4
+density: 4.933
+electronegativity: 2.66
+state: solid
+discovery_year: 1811
+discoverer: Bernard Courtois
+isotopes:
+  - { mass_number: 127, relative_mass: 126.904473, abundance: 1.0 }

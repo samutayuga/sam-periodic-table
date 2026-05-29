@@ -1,0 +1,20 @@
+atomic_number: 44
+name: Ruthenium
+symbol: Ru
+atomic_mass: 101.07
+mass_number: 102
+melting_point: 2607.0
+boiling_point: 4423.0
+density: 12.37
+electronegativity: 2.2
+state: solid
+discovery_year: 1844
+discoverer: Karl Ernst Claus
+isotopes:
+  - { mass_number: 96, relative_mass: 95.907598, abundance: 0.0554 }
+  - { mass_number: 98, relative_mass: 97.905287, abundance: 0.0187 }
+  - { mass_number: 99, relative_mass: 98.905939, abundance: 0.1276 }
+  - { mass_number: 100, relative_mass: 99.904219, abundance: 0.1260 }
+  - { mass_number: 101, relative_mass: 100.905582, abundance: 0.1706 }
+  - { mass_number: 102, relative_mass: 101.904349, abundance: 0.3155 }
+  - { mass_number: 104, relative_mass: 103.905433, abundance: 0.1862 }

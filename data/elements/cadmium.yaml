@@ -1,0 +1,21 @@
+atomic_number: 48
+name: Cadmium
+symbol: Cd
+atomic_mass: 112.414
+mass_number: 114
+melting_point: 594.22
+boiling_point: 1040.0
+density: 8.65
+electronegativity: 1.69
+state: solid
+discovery_year: 1817
+discoverer: Friedrich Strohmeyer
+isotopes:
+  - { mass_number: 106, relative_mass: 105.906459, abundance: 0.01245 }
+  - { mass_number: 108, relative_mass: 107.904184, abundance: 0.00888 }
+  - { mass_number: 110, relative_mass: 109.903002, abundance: 0.12470 }
+  - { mass_number: 111, relative_mass: 110.904178, abundance: 0.12795 }
+  - { mass_number: 112, relative_mass: 111.902758, abundance: 0.24109 }
+  - { mass_number: 113, relative_mass: 112.904402, abundance: 0.12227 }
+  - { mass_number: 114, relative_mass: 113.903359, abundance: 0.28754 }
+  - { mass_number: 116, relative_mass: 115.904756, abundance: 0.07512 }

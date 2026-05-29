@@ -1,0 +1,15 @@
+atomic_number: 63
+name: Europium
+symbol: Eu
+atomic_mass: 151.964
+mass_number: 153
+melting_point: 1099.0
+boiling_point: 1802.0
+density: 5.264
+electronegativity: 1.20
+state: solid
+discovery_year: 1901
+discoverer: Eugene-Anatole Demarcay
+isotopes:
+  - { mass_number: 151, relative_mass: 150.919850, abundance: 0.4781 }
+  - { mass_number: 153, relative_mass: 152.921230, abundance: 0.5219 }

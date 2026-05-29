@@ -1,0 +1,20 @@
+atomic_number: 66
+name: Dysprosium
+symbol: Dy
+atomic_mass: 162.500
+mass_number: 164
+melting_point: 1680.0
+boiling_point: 2840.0
+density: 8.551
+electronegativity: 1.22
+state: solid
+discovery_year: 1886
+discoverer: Paul Emile Lecoq de Boisbaudran
+isotopes:
+  - { mass_number: 156, relative_mass: 155.924283, abundance: 0.000560 }
+  - { mass_number: 158, relative_mass: 157.924409, abundance: 0.000950 }
+  - { mass_number: 160, relative_mass: 159.925197, abundance: 0.023290 }
+  - { mass_number: 161, relative_mass: 160.926933, abundance: 0.188900 }
+  - { mass_number: 162, relative_mass: 161.926798, abundance: 0.254800 }
+  - { mass_number: 163, relative_mass: 162.928731, abundance: 0.249000 }
+  - { mass_number: 164, relative_mass: 163.929175, abundance: 0.282100 }

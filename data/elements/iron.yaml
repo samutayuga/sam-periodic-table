@@ -1,0 +1,15 @@
+atomic_number: 26
+name: Iron
+symbol: Fe
+atomic_mass: 55.845
+mass_number: 56
+melting_point: 1811.0
+boiling_point: 3134.0
+density: 7.874
+electronegativity: 1.83
+state: solid
+isotopes:
+  - { mass_number: 54, relative_mass: 53.939609, abundance: 0.05845 }
+  - { mass_number: 56, relative_mass: 55.934936, abundance: 0.91754 }
+  - { mass_number: 57, relative_mass: 56.935393, abundance: 0.02119 }
+  - { mass_number: 58, relative_mass: 57.933274, abundance: 0.00282 }

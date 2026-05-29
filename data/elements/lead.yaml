@@ -1,0 +1,15 @@
+atomic_number: 82
+name: Lead
+symbol: Pb
+atomic_mass: 207.2
+mass_number: 208
+melting_point: 600.61
+boiling_point: 2022.0
+density: 11.34
+electronegativity: 2.33
+state: solid
+isotopes:
+  - { mass_number: 204, relative_mass: 203.973044, abundance: 0.014 }
+  - { mass_number: 206, relative_mass: 205.974466, abundance: 0.241 }
+  - { mass_number: 207, relative_mass: 206.975897, abundance: 0.221 }
+  - { mass_number: 208, relative_mass: 207.976653, abundance: 0.524 }

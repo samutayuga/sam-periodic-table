@@ -1,0 +1,12 @@
+atomic_number: 33
+name: Arsenic
+symbol: As
+atomic_mass: 74.9216
+mass_number: 75
+melting_point: 1090.0
+boiling_point: 887.0
+density: 5.727
+electronegativity: 2.18
+state: solid
+isotopes:
+  - { mass_number: 75, relative_mass: 74.921597, abundance: 1.0 }

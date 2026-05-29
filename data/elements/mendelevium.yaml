@@ -1,0 +1,10 @@
+atomic_number: 101
+name: Mendelevium
+symbol: Md
+atomic_mass: 258.0
+mass_number: 258
+state: solid
+discovery_year: 1955
+discoverer: Albert Ghiorso
+isotopes:
+  - { mass_number: 258, relative_mass: 258.098431, abundance: 1.0 }

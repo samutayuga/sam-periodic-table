@@ -1,0 +1,21 @@
+atomic_number: 52
+name: Tellurium
+symbol: Te
+atomic_mass: 127.60
+mass_number: 130
+melting_point: 722.66
+boiling_point: 1261.0
+density: 6.232
+electronegativity: 2.1
+state: solid
+discovery_year: 1782
+discoverer: Franz-Joseph Muller von Reichenstein
+isotopes:
+  - { mass_number: 120, relative_mass: 119.904020, abundance: 0.0009 }
+  - { mass_number: 122, relative_mass: 121.903044, abundance: 0.0255 }
+  - { mass_number: 123, relative_mass: 122.904270, abundance: 0.0089 }
+  - { mass_number: 124, relative_mass: 123.902818, abundance: 0.0474 }
+  - { mass_number: 125, relative_mass: 124.904431, abundance: 0.0707 }
+  - { mass_number: 126, relative_mass: 125.903312, abundance: 0.1884 }
+  - { mass_number: 128, relative_mass: 127.904463, abundance: 0.3174 }
+  - { mass_number: 130, relative_mass: 129.906224, abundance: 0.3408 }

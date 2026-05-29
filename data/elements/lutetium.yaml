@@ -1,0 +1,15 @@
+atomic_number: 71
+name: Lutetium
+symbol: Lu
+atomic_mass: 174.9668
+mass_number: 175
+melting_point: 1925.0
+boiling_point: 3675.0
+density: 9.841
+electronegativity: 1.27
+state: solid
+discovery_year: 1907
+discoverer: Georges Urbain
+isotopes:
+  - { mass_number: 175, relative_mass: 174.940772, abundance: 0.97401 }
+  - { mass_number: 176, relative_mass: 175.942686, abundance: 0.02599 }

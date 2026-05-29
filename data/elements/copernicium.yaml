@@ -1,0 +1,10 @@
+atomic_number: 112
+name: Copernicium
+symbol: Cn
+atomic_mass: 285.0
+mass_number: 285
+state: solid
+discovery_year: 1996
+discoverer: Peter Armbruster
+isotopes:
+  - { mass_number: 285, relative_mass: 285.177120, abundance: 1.0 }

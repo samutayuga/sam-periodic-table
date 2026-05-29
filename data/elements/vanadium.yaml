@@ -1,0 +1,15 @@
+atomic_number: 23
+name: Vanadium
+symbol: V
+atomic_mass: 50.9415
+mass_number: 51
+melting_point: 2183.0
+boiling_point: 3680.0
+density: 6.0
+electronegativity: 1.63
+state: solid
+discovery_year: 1801
+discoverer: Andres Manuel del Rio
+isotopes:
+  - { mass_number: 50, relative_mass: 49.947163, abundance: 0.0025 }
+  - { mass_number: 51, relative_mass: 50.943960, abundance: 0.9975 }

@@ -1,0 +1,10 @@
+atomic_number: 118
+name: Oganesson
+symbol: Og
+atomic_mass: 294.0
+mass_number: 294
+state: gas
+discovery_year: 2002
+discoverer: Joint Institute for Nuclear Research
+isotopes:
+  - { mass_number: 294, relative_mass: 294.213980, abundance: 1.0 }

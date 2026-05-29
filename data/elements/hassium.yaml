@@ -1,0 +1,10 @@
+atomic_number: 108
+name: Hassium
+symbol: Hs
+atomic_mass: 269.0
+mass_number: 269
+state: solid
+discovery_year: 1984
+discoverer: Peter Armbruster
+isotopes:
+  - { mass_number: 269, relative_mass: 269.128750, abundance: 1.0 }

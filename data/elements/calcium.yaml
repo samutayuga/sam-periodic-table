@@ -1,0 +1,19 @@
+atomic_number: 20
+name: Calcium
+symbol: Ca
+atomic_mass: 40.078
+mass_number: 40
+melting_point: 1115.0
+boiling_point: 1757.0
+density: 1.55
+electronegativity: 1.00
+state: solid
+discovery_year: 1808
+discoverer: Humphry Davy
+isotopes:
+  - { mass_number: 40, relative_mass: 39.962591, abundance: 0.96941 }
+  - { mass_number: 42, relative_mass: 41.958618, abundance: 0.00647 }
+  - { mass_number: 43, relative_mass: 42.958767, abundance: 0.00135 }
+  - { mass_number: 44, relative_mass: 43.955482, abundance: 0.02086 }
+  - { mass_number: 46, relative_mass: 45.953693, abundance: 0.00004 }
+  - { mass_number: 48, relative_mass: 47.952534, abundance: 0.00187 }

@@ -1,0 +1,15 @@
+atomic_number: 77
+name: Iridium
+symbol: Ir
+atomic_mass: 192.217
+mass_number: 193
+melting_point: 2719.0
+boiling_point: 4403.0
+density: 22.56
+electronegativity: 2.2
+state: solid
+discovery_year: 1803
+discoverer: Smithson Tennant
+isotopes:
+  - { mass_number: 191, relative_mass: 190.960594, abundance: 0.3730 }
+  - { mass_number: 193, relative_mass: 192.962926, abundance: 0.6270 }

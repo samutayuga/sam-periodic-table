@@ -1,0 +1,13 @@
+atomic_number: 29
+name: Copper
+symbol: Cu
+atomic_mass: 63.546
+mass_number: 63
+melting_point: 1357.77
+boiling_point: 2835.0
+density: 8.96
+electronegativity: 1.90
+state: solid
+isotopes:
+  - { mass_number: 63, relative_mass: 62.929598, abundance: 0.6915 }
+  - { mass_number: 65, relative_mass: 64.92779, abundance: 0.3085 }

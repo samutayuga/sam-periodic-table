@@ -1,0 +1,15 @@
+atomic_number: 37
+name: Rubidium
+symbol: Rb
+atomic_mass: 85.4678
+mass_number: 85
+melting_point: 312.46
+boiling_point: 961.0
+density: 1.532
+electronegativity: 0.82
+state: solid
+discovery_year: 1861
+discoverer: Robert Bunsen
+isotopes:
+  - { mass_number: 85, relative_mass: 84.911790, abundance: 0.7217 }
+  - { mass_number: 87, relative_mass: 86.909181, abundance: 0.2783 }

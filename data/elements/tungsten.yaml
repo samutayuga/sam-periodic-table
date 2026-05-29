@@ -1,0 +1,18 @@
+atomic_number: 74
+name: Tungsten
+symbol: W
+atomic_mass: 183.84
+mass_number: 184
+melting_point: 3695.0
+boiling_point: 6203.0
+density: 19.25
+electronegativity: 2.36
+state: solid
+discovery_year: 1783
+discoverer: Juan Jose Elhuyar
+isotopes:
+  - { mass_number: 180, relative_mass: 179.946706, abundance: 0.0012 }
+  - { mass_number: 182, relative_mass: 181.948204, abundance: 0.2650 }
+  - { mass_number: 183, relative_mass: 182.950223, abundance: 0.1431 }
+  - { mass_number: 184, relative_mass: 183.950931, abundance: 0.3064 }
+  - { mass_number: 186, relative_mass: 185.954364, abundance: 0.2843 }

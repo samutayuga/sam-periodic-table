@@ -1,0 +1,12 @@
+atomic_number: 83
+name: Bismuth
+symbol: Bi
+atomic_mass: 208.9804
+mass_number: 209
+melting_point: 544.7
+boiling_point: 1837.0
+density: 9.807
+electronegativity: 2.02
+state: solid
+isotopes:
+  - { mass_number: 209, relative_mass: 208.980399, abundance: 1.0 }

@@ -1,0 +1,14 @@
+atomic_number: 41
+name: Niobium
+symbol: Nb
+atomic_mass: 92.9064
+mass_number: 93
+melting_point: 2750.0
+boiling_point: 5017.0
+density: 8.57
+electronegativity: 1.6
+state: solid
+discovery_year: 1801
+discoverer: Charles Hatchett
+isotopes:
+  - { mass_number: 93, relative_mass: 92.906378, abundance: 1.0 }

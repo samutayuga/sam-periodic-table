@@ -1,0 +1,18 @@
+atomic_number: 80
+name: Mercury
+symbol: Hg
+atomic_mass: 200.592
+mass_number: 202
+melting_point: 234.321
+boiling_point: 629.88
+density: 13.534
+electronegativity: 2.00
+state: liquid
+isotopes:
+  - { mass_number: 196, relative_mass: 195.965833, abundance: 0.0015 }
+  - { mass_number: 198, relative_mass: 197.966769, abundance: 0.0997 }
+  - { mass_number: 199, relative_mass: 198.968280, abundance: 0.1687 }
+  - { mass_number: 200, relative_mass: 199.968326, abundance: 0.2310 }
+  - { mass_number: 201, relative_mass: 200.970302, abundance: 0.1318 }
+  - { mass_number: 202, relative_mass: 201.970643, abundance: 0.2986 }
+  - { mass_number: 204, relative_mass: 203.973494, abundance: 0.0687 }

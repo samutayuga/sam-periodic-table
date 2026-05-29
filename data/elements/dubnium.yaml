@@ -1,0 +1,10 @@
+atomic_number: 105
+name: Dubnium
+symbol: Db
+atomic_mass: 268.0
+mass_number: 268
+state: solid
+discovery_year: 1967
+discoverer: Joint Institute for Nuclear Research
+isotopes:
+  - { mass_number: 268, relative_mass: 268.125670, abundance: 1.0 }

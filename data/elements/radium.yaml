@@ -1,0 +1,14 @@
+atomic_number: 88
+name: Radium
+symbol: Ra
+atomic_mass: 226.0
+mass_number: 226
+melting_point: 973.0
+boiling_point: 2010.0
+density: 5.5
+electronegativity: 0.9
+state: solid
+discovery_year: 1898
+discoverer: Marie Curie
+isotopes:
+  - { mass_number: 226, relative_mass: 226.025410, abundance: 1.0 }

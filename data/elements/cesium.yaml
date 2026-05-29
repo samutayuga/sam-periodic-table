@@ -1,0 +1,14 @@
+atomic_number: 55
+name: Cesium
+symbol: Cs
+atomic_mass: 132.9055
+mass_number: 133
+melting_point: 301.7
+boiling_point: 944.0
+density: 1.873
+electronegativity: 0.79
+state: solid
+discovery_year: 1860
+discoverer: Robert Bunsen
+isotopes:
+  - { mass_number: 133, relative_mass: 132.905452, abundance: 1.0 }

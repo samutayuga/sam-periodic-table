@@ -1,0 +1,16 @@
+atomic_number: 19
+name: Potassium
+symbol: K
+atomic_mass: 39.0983
+mass_number: 39
+melting_point: 336.7
+boiling_point: 1032.0
+density: 0.862
+electronegativity: 0.82
+state: solid
+discovery_year: 1807
+discoverer: Humphry Davy
+isotopes:
+  - { mass_number: 39, relative_mass: 38.963707, abundance: 0.932581 }
+  - { mass_number: 40, relative_mass: 39.963998, abundance: 0.000117 }
+  - { mass_number: 41, relative_mass: 40.961825, abundance: 0.067302 }

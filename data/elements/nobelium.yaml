@@ -1,0 +1,10 @@
+atomic_number: 102
+name: Nobelium
+symbol: No
+atomic_mass: 259.0
+mass_number: 259
+state: solid
+discovery_year: 1958
+discoverer: Albert Ghiorso
+isotopes:
+  - { mass_number: 259, relative_mass: 259.101030, abundance: 1.0 }

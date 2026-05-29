@@ -1,0 +1,14 @@
+atomic_number: 25
+name: Manganese
+symbol: Mn
+atomic_mass: 54.938
+mass_number: 55
+melting_point: 1519.0
+boiling_point: 2334.0
+density: 7.21
+electronegativity: 1.55
+state: solid
+discovery_year: 1774
+discoverer: Johan Gottlieb Gahn
+isotopes:
+  - { mass_number: 55, relative_mass: 54.938045, abundance: 1.0 }

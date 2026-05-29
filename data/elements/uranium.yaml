@@ -1,0 +1,16 @@
+atomic_number: 92
+name: Uranium
+symbol: U
+atomic_mass: 238.02891
+mass_number: 238
+melting_point: 1405.3
+boiling_point: 4404.0
+density: 19.1
+electronegativity: 1.38
+state: solid
+discovery_year: 1789
+discoverer: Martin Heinrich Klaproth
+isotopes:
+  - { mass_number: 234, relative_mass: 234.040952, abundance: 0.000054 }
+  - { mass_number: 235, relative_mass: 235.043930, abundance: 0.007204 }
+  - { mass_number: 238, relative_mass: 238.050788, abundance: 0.992742 }

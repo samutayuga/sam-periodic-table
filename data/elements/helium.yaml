@@ -1,0 +1,13 @@
+atomic_number: 2
+name: Helium
+symbol: He
+atomic_mass: 4.002602
+mass_number: 4
+boiling_point: 4.222
+density: 0.0001785
+state: gas
+discovery_year: 1868
+discoverer: Pierre Janssen
+isotopes:
+  - { mass_number: 3, relative_mass: 3.016029, abundance: 0.00000134 }
+  - { mass_number: 4, relative_mass: 4.002603, abundance: 0.99999866 }

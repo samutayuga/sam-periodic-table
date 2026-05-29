@@ -1,0 +1,13 @@
+atomic_number: 86
+name: Radon
+symbol: Rn
+atomic_mass: 222.0
+mass_number: 222
+melting_point: 202.0
+boiling_point: 211.5
+density: 0.00973
+state: gas
+discovery_year: 1900
+discoverer: Friedrich Ernst Dorn
+isotopes:
+  - { mass_number: 222, relative_mass: 222.017578, abundance: 1.0 }

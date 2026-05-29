@@ -1,0 +1,14 @@
+atomic_number: 43
+name: Technetium
+symbol: Tc
+atomic_mass: 98.0
+mass_number: 98
+melting_point: 2430.0
+boiling_point: 4538.0
+density: 11.0
+electronegativity: 1.9
+state: solid
+discovery_year: 1937
+discoverer: Carlo Perrier
+isotopes:
+  - { mass_number: 98, relative_mass: 97.907216, abundance: 1.0 }

@@ -1,0 +1,14 @@
+atomic_number: 4
+name: Beryllium
+symbol: Be
+atomic_mass: 9.0122
+mass_number: 9
+melting_point: 1560.0
+boiling_point: 2742.0
+density: 1.85
+electronegativity: 1.57
+state: solid
+discovery_year: 1798
+discoverer: Louis-Nicolas Vauquelin
+isotopes:
+  - { mass_number: 9, relative_mass: 9.012182, abundance: 1.0 }

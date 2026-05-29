@@ -1,0 +1,14 @@
+atomic_number: 59
+name: Praseodymium
+symbol: Pr
+atomic_mass: 140.9077
+mass_number: 141
+melting_point: 1208.0
+boiling_point: 3403.0
+density: 6.77
+electronegativity: 1.13
+state: solid
+discovery_year: 1885
+discoverer: Carl Auer von Welsbach
+isotopes:
+  - { mass_number: 141, relative_mass: 140.907653, abundance: 1.0 }

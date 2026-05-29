@@ -1,0 +1,15 @@
+atomic_number: 57
+name: Lanthanum
+symbol: La
+atomic_mass: 138.9055
+mass_number: 139
+melting_point: 1193.0
+boiling_point: 3737.0
+density: 6.162
+electronegativity: 1.10
+state: solid
+discovery_year: 1839
+discoverer: Carl Gustaf Mosander
+isotopes:
+  - { mass_number: 138, relative_mass: 137.907112, abundance: 0.000902 }
+  - { mass_number: 139, relative_mass: 138.906353, abundance: 0.999098 }

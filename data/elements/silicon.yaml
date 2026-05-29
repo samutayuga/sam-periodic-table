@@ -1,0 +1,16 @@
+atomic_number: 14
+name: Silicon
+symbol: Si
+atomic_mass: 28.085
+mass_number: 28
+melting_point: 1687.0
+boiling_point: 3538.0
+density: 2.3296
+electronegativity: 1.90
+state: solid
+discovery_year: 1824
+discoverer: Jons Jacob Berzelius
+isotopes:
+  - { mass_number: 28, relative_mass: 27.976927, abundance: 0.92223 }
+  - { mass_number: 29, relative_mass: 28.976495, abundance: 0.04685 }
+  - { mass_number: 30, relative_mass: 29.973770, abundance: 0.03092 }

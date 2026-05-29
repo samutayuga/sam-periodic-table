@@ -1,0 +1,20 @@
+atomic_number: 64
+name: Gadolinium
+symbol: Gd
+atomic_mass: 157.25
+mass_number: 158
+melting_point: 1585.0
+boiling_point: 3546.0
+density: 7.90
+electronegativity: 1.20
+state: solid
+discovery_year: 1880
+discoverer: Jean Charles Galissard de Marignac
+isotopes:
+  - { mass_number: 152, relative_mass: 151.919791, abundance: 0.0020 }
+  - { mass_number: 154, relative_mass: 153.920866, abundance: 0.0218 }
+  - { mass_number: 155, relative_mass: 154.922622, abundance: 0.1480 }
+  - { mass_number: 156, relative_mass: 155.922123, abundance: 0.2047 }
+  - { mass_number: 157, relative_mass: 156.923960, abundance: 0.1565 }
+  - { mass_number: 158, relative_mass: 157.924104, abundance: 0.2484 }
+  - { mass_number: 160, relative_mass: 159.927054, abundance: 0.2186 }

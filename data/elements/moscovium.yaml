@@ -1,0 +1,10 @@
+atomic_number: 115
+name: Moscovium
+symbol: Mc
+atomic_mass: 290.0
+mass_number: 290
+state: solid
+discovery_year: 2003
+discoverer: Joint Institute for Nuclear Research
+isotopes:
+  - { mass_number: 290, relative_mass: 290.195980, abundance: 1.0 }

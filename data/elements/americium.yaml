@@ -1,0 +1,14 @@
+atomic_number: 95
+name: Americium
+symbol: Am
+atomic_mass: 243.0
+mass_number: 243
+melting_point: 1449.0
+boiling_point: 2880.0
+density: 13.67
+electronegativity: 1.3
+state: solid
+discovery_year: 1944
+discoverer: Glenn T. Seaborg
+isotopes:
+  - { mass_number: 243, relative_mass: 243.061381, abundance: 1.0 }

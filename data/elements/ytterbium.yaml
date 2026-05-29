@@ -1,0 +1,20 @@
+atomic_number: 70
+name: Ytterbium
+symbol: Yb
+atomic_mass: 173.045
+mass_number: 174
+melting_point: 1097.0
+boiling_point: 1469.0
+density: 6.90
+electronegativity: 1.10
+state: solid
+discovery_year: 1878
+discoverer: Jean Charles Galissard de Marignac
+isotopes:
+  - { mass_number: 168, relative_mass: 167.933897, abundance: 0.00123 }
+  - { mass_number: 170, relative_mass: 169.934762, abundance: 0.02982 }
+  - { mass_number: 171, relative_mass: 170.936326, abundance: 0.14090 }
+  - { mass_number: 172, relative_mass: 171.936382, abundance: 0.21680 }
+  - { mass_number: 173, relative_mass: 172.938211, abundance: 0.16103 }
+  - { mass_number: 174, relative_mass: 173.938862, abundance: 0.32026 }
+  - { mass_number: 176, relative_mass: 175.942572, abundance: 0.12996 }

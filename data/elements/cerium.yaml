@@ -1,0 +1,17 @@
+atomic_number: 58
+name: Cerium
+symbol: Ce
+atomic_mass: 140.116
+mass_number: 140
+melting_point: 1068.0
+boiling_point: 3716.0
+density: 6.770
+electronegativity: 1.12
+state: solid
+discovery_year: 1803
+discoverer: Jons Jacob Berzelius
+isotopes:
+  - { mass_number: 136, relative_mass: 135.907172, abundance: 0.00185 }
+  - { mass_number: 138, relative_mass: 137.905991, abundance: 0.00251 }
+  - { mass_number: 140, relative_mass: 139.905439, abundance: 0.88450 }
+  - { mass_number: 142, relative_mass: 141.909244, abundance: 0.11114 }

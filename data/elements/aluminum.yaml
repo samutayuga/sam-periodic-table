@@ -1,0 +1,14 @@
+atomic_number: 13
+name: Aluminum
+symbol: Al
+atomic_mass: 26.9815
+mass_number: 27
+melting_point: 933.47
+boiling_point: 2792.0
+density: 2.70
+electronegativity: 1.61
+state: solid
+discovery_year: 1825
+discoverer: Hans Christian Oersted
+isotopes:
+  - { mass_number: 27, relative_mass: 26.981538, abundance: 1.0 }

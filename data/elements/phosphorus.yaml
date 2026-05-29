@@ -1,0 +1,14 @@
+atomic_number: 15
+name: Phosphorus
+symbol: P
+atomic_mass: 30.97376
+mass_number: 31
+melting_point: 317.3
+boiling_point: 553.7
+density: 1.823
+electronegativity: 2.19
+state: solid
+discovery_year: 1669
+discoverer: Hennig Brand
+isotopes:
+  - { mass_number: 31, relative_mass: 30.973762, abundance: 1.0 }

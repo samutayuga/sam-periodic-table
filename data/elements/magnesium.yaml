@@ -1,0 +1,16 @@
+atomic_number: 12
+name: Magnesium
+symbol: Mg
+atomic_mass: 24.305
+mass_number: 24
+melting_point: 923.0
+boiling_point: 1363.0
+density: 1.738
+electronegativity: 1.31
+state: solid
+discovery_year: 1755
+discoverer: Joseph Black
+isotopes:
+  - { mass_number: 24, relative_mass: 23.985042, abundance: 0.7899 }
+  - { mass_number: 25, relative_mass: 24.985837, abundance: 0.1000 }
+  - { mass_number: 26, relative_mass: 25.982593, abundance: 0.1101 }

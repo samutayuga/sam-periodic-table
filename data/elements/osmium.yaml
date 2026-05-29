@@ -1,0 +1,20 @@
+atomic_number: 76
+name: Osmium
+symbol: Os
+atomic_mass: 190.23
+mass_number: 192
+melting_point: 3306.0
+boiling_point: 5285.0
+density: 22.59
+electronegativity: 2.2
+state: solid
+discovery_year: 1803
+discoverer: Smithson Tennant
+isotopes:
+  - { mass_number: 184, relative_mass: 183.952489, abundance: 0.000197 }
+  - { mass_number: 186, relative_mass: 185.953838, abundance: 0.015860 }
+  - { mass_number: 187, relative_mass: 186.955751, abundance: 0.019600 }
+  - { mass_number: 188, relative_mass: 187.955838, abundance: 0.132400 }
+  - { mass_number: 189, relative_mass: 188.958148, abundance: 0.161500 }
+  - { mass_number: 190, relative_mass: 189.958447, abundance: 0.262600 }
+  - { mass_number: 192, relative_mass: 191.961481, abundance: 0.408000 }

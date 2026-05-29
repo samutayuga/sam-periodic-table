@@ -1,0 +1,15 @@
+atomic_number: 49
+name: Indium
+symbol: In
+atomic_mass: 114.818
+mass_number: 115
+melting_point: 429.75
+boiling_point: 2345.0
+density: 7.31
+electronegativity: 1.78
+state: solid
+discovery_year: 1863
+discoverer: Ferdinand Reich
+isotopes:
+  - { mass_number: 113, relative_mass: 112.904058, abundance: 0.0429 }
+  - { mass_number: 115, relative_mass: 114.903879, abundance: 0.9571 }

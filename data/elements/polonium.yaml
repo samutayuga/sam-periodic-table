@@ -1,0 +1,14 @@
+atomic_number: 84
+name: Polonium
+symbol: Po
+atomic_mass: 209.0
+mass_number: 209
+melting_point: 527.0
+boiling_point: 1235.0
+density: 9.32
+electronegativity: 2.0
+state: solid
+discovery_year: 1898
+discoverer: Marie Curie
+isotopes:
+  - { mass_number: 209, relative_mass: 208.982430, abundance: 1.0 }

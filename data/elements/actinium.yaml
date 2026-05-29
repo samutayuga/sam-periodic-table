@@ -1,0 +1,14 @@
+atomic_number: 89
+name: Actinium
+symbol: Ac
+atomic_mass: 227.0
+mass_number: 227
+melting_point: 1500.0
+boiling_point: 3500.0
+density: 10.07
+electronegativity: 1.1
+state: solid
+discovery_year: 1899
+discoverer: Andre-Louis Debierne
+isotopes:
+  - { mass_number: 227, relative_mass: 227.027752, abundance: 1.0 }

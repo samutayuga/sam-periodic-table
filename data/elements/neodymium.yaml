@@ -1,0 +1,20 @@
+atomic_number: 60
+name: Neodymium
+symbol: Nd
+atomic_mass: 144.242
+mass_number: 144
+melting_point: 1297.0
+boiling_point: 3347.0
+density: 7.01
+electronegativity: 1.14
+state: solid
+discovery_year: 1885
+discoverer: Carl Auer von Welsbach
+isotopes:
+  - { mass_number: 142, relative_mass: 141.907729, abundance: 0.27152 }
+  - { mass_number: 143, relative_mass: 142.90982, abundance: 0.12174 }
+  - { mass_number: 144, relative_mass: 143.910093, abundance: 0.23798 }
+  - { mass_number: 145, relative_mass: 144.912579, abundance: 0.08293 }
+  - { mass_number: 146, relative_mass: 145.913123, abundance: 0.17189 }
+  - { mass_number: 148, relative_mass: 147.916899, abundance: 0.05756 }
+  - { mass_number: 150, relative_mass: 149.920902, abundance: 0.05638 }

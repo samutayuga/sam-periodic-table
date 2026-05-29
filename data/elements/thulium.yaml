@@ -1,0 +1,14 @@
+atomic_number: 69
+name: Thulium
+symbol: Tm
+atomic_mass: 168.9342
+mass_number: 169
+melting_point: 1818.0
+boiling_point: 2223.0
+density: 9.32
+electronegativity: 1.25
+state: solid
+discovery_year: 1879
+discoverer: Per Teodor Cleve
+isotopes:
+  - { mass_number: 169, relative_mass: 168.934213, abundance: 1.0 }

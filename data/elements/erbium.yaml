@@ -1,0 +1,19 @@
+atomic_number: 68
+name: Erbium
+symbol: Er
+atomic_mass: 167.259
+mass_number: 166
+melting_point: 1802.0
+boiling_point: 3141.0
+density: 9.066
+electronegativity: 1.24
+state: solid
+discovery_year: 1843
+discoverer: Carl Gustaf Mosander
+isotopes:
+  - { mass_number: 162, relative_mass: 161.928778, abundance: 0.00139 }
+  - { mass_number: 164, relative_mass: 163.929200, abundance: 0.01601 }
+  - { mass_number: 166, relative_mass: 165.930293, abundance: 0.33503 }
+  - { mass_number: 167, relative_mass: 166.932048, abundance: 0.22869 }
+  - { mass_number: 168, relative_mass: 167.932370, abundance: 0.26978 }
+  - { mass_number: 170, relative_mass: 169.935464, abundance: 0.14910 }

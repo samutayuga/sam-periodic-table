@@ -1,0 +1,15 @@
+atomic_number: 5
+name: Boron
+symbol: B
+atomic_mass: 10.81
+mass_number: 11
+melting_point: 2349.0
+boiling_point: 4200.0
+density: 2.34
+electronegativity: 2.04
+state: solid
+discovery_year: 1808
+discoverer: Humphry Davy
+isotopes:
+  - { mass_number: 10, relative_mass: 10.012937, abundance: 0.199 }
+  - { mass_number: 11, relative_mass: 11.009305, abundance: 0.801 }

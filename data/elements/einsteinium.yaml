@@ -1,0 +1,12 @@
+atomic_number: 99
+name: Einsteinium
+symbol: Es
+atomic_mass: 252.0
+mass_number: 252
+melting_point: 1133.0
+density: 8.84
+state: solid
+discovery_year: 1952
+discoverer: Albert Ghiorso
+isotopes:
+  - { mass_number: 252, relative_mass: 252.082980, abundance: 1.0 }

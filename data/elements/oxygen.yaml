@@ -1,0 +1,16 @@
+atomic_number: 8
+name: Oxygen
+symbol: O
+atomic_mass: 15.999
+mass_number: 16
+melting_point: 54.36
+boiling_point: 90.188
+density: 0.001429
+electronegativity: 3.44
+state: gas
+discovery_year: 1771
+discoverer: Carl Wilhelm Scheele
+isotopes:
+  - { mass_number: 16, relative_mass: 15.994915, abundance: 0.99757 }
+  - { mass_number: 17, relative_mass: 16.999132, abundance: 0.00038 }
+  - { mass_number: 18, relative_mass: 17.99916, abundance: 0.00205 }

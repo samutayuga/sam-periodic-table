@@ -1,0 +1,10 @@
+atomic_number: 100
+name: Fermium
+symbol: Fm
+atomic_mass: 257.0
+mass_number: 257
+state: solid
+discovery_year: 1952
+discoverer: Albert Ghiorso
+isotopes:
+  - { mass_number: 257, relative_mass: 257.095105, abundance: 1.0 }

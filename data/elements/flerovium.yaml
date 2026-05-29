@@ -1,0 +1,10 @@
+atomic_number: 114
+name: Flerovium
+symbol: Fl
+atomic_mass: 289.0
+mass_number: 289
+state: solid
+discovery_year: 1999
+discoverer: Joint Institute for Nuclear Research
+isotopes:
+  - { mass_number: 289, relative_mass: 289.190420, abundance: 1.0 }

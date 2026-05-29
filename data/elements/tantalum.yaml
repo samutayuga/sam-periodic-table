@@ -1,0 +1,15 @@
+atomic_number: 73
+name: Tantalum
+symbol: Ta
+atomic_mass: 180.9479
+mass_number: 181
+melting_point: 3290.0
+boiling_point: 5731.0
+density: 16.69
+electronegativity: 1.5
+state: solid
+discovery_year: 1802
+discoverer: Anders Gustaf Ekeberg
+isotopes:
+  - { mass_number: 180, relative_mass: 179.947465, abundance: 0.00012 }
+  - { mass_number: 181, relative_mass: 180.947996, abundance: 0.99988 }

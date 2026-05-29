@@ -1,0 +1,10 @@
+atomic_number: 103
+name: Lawrencium
+symbol: Lr
+atomic_mass: 266.0
+mass_number: 266
+state: solid
+discovery_year: 1961
+discoverer: Albert Ghiorso
+isotopes:
+  - { mass_number: 266, relative_mass: 266.119830, abundance: 1.0 }

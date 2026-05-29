@@ -1,0 +1,18 @@
+atomic_number: 22
+name: Titanium
+symbol: Ti
+atomic_mass: 47.867
+mass_number: 48
+melting_point: 1941.0
+boiling_point: 3560.0
+density: 4.506
+electronegativity: 1.54
+state: solid
+discovery_year: 1791
+discoverer: William Gregor
+isotopes:
+  - { mass_number: 46, relative_mass: 45.952632, abundance: 0.0825 }
+  - { mass_number: 47, relative_mass: 46.951763, abundance: 0.0744 }
+  - { mass_number: 48, relative_mass: 47.947946, abundance: 0.7372 }
+  - { mass_number: 49, relative_mass: 48.947870, abundance: 0.0541 }
+  - { mass_number: 50, relative_mass: 49.944791, abundance: 0.0518 }

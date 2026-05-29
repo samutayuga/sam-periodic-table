@@ -1,0 +1,10 @@
+atomic_number: 116
+name: Livermorium
+symbol: Lv
+atomic_mass: 293.0
+mass_number: 293
+state: solid
+discovery_year: 2000
+discoverer: Joint Institute for Nuclear Research
+isotopes:
+  - { mass_number: 293, relative_mass: 293.204490, abundance: 1.0 }

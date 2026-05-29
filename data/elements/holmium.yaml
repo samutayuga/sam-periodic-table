@@ -1,0 +1,14 @@
+atomic_number: 67
+name: Holmium
+symbol: Ho
+atomic_mass: 164.9303
+mass_number: 165
+melting_point: 1734.0
+boiling_point: 2993.0
+density: 8.795
+electronegativity: 1.23
+state: solid
+discovery_year: 1878
+discoverer: Marc Delafontaine
+isotopes:
+  - { mass_number: 165, relative_mass: 164.930322, abundance: 1.0 }

@@ -1,0 +1,10 @@
+atomic_number: 113
+name: Nihonium
+symbol: Nh
+atomic_mass: 286.0
+mass_number: 286
+state: solid
+discovery_year: 2004
+discoverer: Kosuke Morita
+isotopes:
+  - { mass_number: 286, relative_mass: 286.182120, abundance: 1.0 }

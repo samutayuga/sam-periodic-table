@@ -1,0 +1,14 @@
+atomic_number: 27
+name: Cobalt
+symbol: Co
+atomic_mass: 58.933
+mass_number: 59
+melting_point: 1768.0
+boiling_point: 3200.0
+density: 8.90
+electronegativity: 1.88
+state: solid
+discovery_year: 1735
+discoverer: Georg Brandt
+isotopes:
+  - { mass_number: 59, relative_mass: 58.933195, abundance: 1.0 }

@@ -1,0 +1,14 @@
+atomic_number: 45
+name: Rhodium
+symbol: Rh
+atomic_mass: 102.9055
+mass_number: 103
+melting_point: 2237.0
+boiling_point: 3968.0
+density: 12.41
+electronegativity: 2.28
+state: solid
+discovery_year: 1803
+discoverer: William Hyde Wollaston
+isotopes:
+  - { mass_number: 103, relative_mass: 102.905504, abundance: 1.0 }

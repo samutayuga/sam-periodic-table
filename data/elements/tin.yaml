@@ -1,0 +1,21 @@
+atomic_number: 50
+name: Tin
+symbol: Sn
+atomic_mass: 118.710
+mass_number: 120
+melting_point: 505.08
+boiling_point: 2875.0
+density: 7.287
+electronegativity: 1.96
+state: solid
+isotopes:
+  - { mass_number: 112, relative_mass: 111.904822, abundance: 0.0097 }
+  - { mass_number: 114, relative_mass: 113.902783, abundance: 0.0066 }
+  - { mass_number: 115, relative_mass: 114.903347, abundance: 0.0034 }
+  - { mass_number: 116, relative_mass: 115.901745, abundance: 0.1454 }
+  - { mass_number: 117, relative_mass: 116.902954, abundance: 0.0768 }
+  - { mass_number: 118, relative_mass: 117.901607, abundance: 0.2422 }
+  - { mass_number: 119, relative_mass: 118.903311, abundance: 0.0859 }
+  - { mass_number: 120, relative_mass: 119.902202, abundance: 0.3258 }
+  - { mass_number: 122, relative_mass: 121.903440, abundance: 0.0463 }
+  - { mass_number: 124, relative_mass: 123.905274, abundance: 0.0579 }
