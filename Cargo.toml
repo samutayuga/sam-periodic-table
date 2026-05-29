@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["crates/pt-domain", "crates/pt-data", "crates/pt-services", "crates/pt-cli"]
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+
+[workspace.dependencies]
+pt-domain = { path = "crates/pt-domain" }
+pt-data = { path = "crates/pt-data" }
+pt-services = { path = "crates/pt-services" }
+serde = { version = "1", features = ["derive"] }
+serde_yaml_ng = "0.10"
+serde_json = "1"
+thiserror = "2"
+clap = { version = "4", features = ["derive"] }
+tempfile = "3"
+assert_cmd = "2"
+predicates = "3"

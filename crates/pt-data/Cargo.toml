@@ -1,0 +1,13 @@
+[package]
+name = "pt-data"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+pt-domain = { workspace = true }
+serde = { workspace = true }
+serde_yaml_ng = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

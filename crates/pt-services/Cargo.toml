@@ -1,0 +1,9 @@
+[package]
+name = "pt-services"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+pt-domain = { workspace = true }
+pt-data = { workspace = true }
+thiserror = { workspace = true }
