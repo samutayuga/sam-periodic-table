@@ -114,6 +114,28 @@ pub fn group(z: u8) -> Result<u8, DomainError> {
     Ok(g)
 }
 
+/// Common oxidation states (heuristic, group-based — not authoritative).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct OxidationStates(pub Vec<i8>);
+
+/// Best-effort common oxidation states derived from the group.
+pub fn oxidation_states(z: u8) -> Result<OxidationStates, DomainError> {
+    validate_z(z)?;
+    let states = match group(z)? {
+        1 => vec![1],
+        2 => vec![2],
+        13 => vec![3],
+        14 => vec![-4, 4],
+        15 => vec![-3, 3, 5],
+        16 => vec![-2],
+        17 => vec![-1],
+        18 => vec![0],
+        3..=12 => vec![2, 3],
+        _ => vec![],
+    };
+    Ok(OxidationStates(states))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -185,5 +207,15 @@ mod tests {
         assert_eq!(category(8).unwrap(), Category::ReactiveNonmetal); // O
         assert_eq!(category(60).unwrap(), Category::Lanthanide); // Nd
         assert_eq!(category(92).unwrap(), Category::Actinide); // U
+    }
+
+    #[test]
+    fn oxidation_states_main_group() {
+        assert_eq!(oxidation_states(11).unwrap().0, vec![1]); // Na
+        assert_eq!(oxidation_states(12).unwrap().0, vec![2]); // Mg
+        assert_eq!(oxidation_states(8).unwrap().0, vec![-2]); // O
+        assert_eq!(oxidation_states(9).unwrap().0, vec![-1]); // F
+        assert_eq!(oxidation_states(10).unwrap().0, vec![0]); // Ne
+        assert_eq!(oxidation_states(5).unwrap().0, vec![3]); // B
     }
 }
