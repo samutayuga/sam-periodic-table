@@ -162,16 +162,16 @@ target/debug/pt get --symbol Fe
 
 ```
 Iron (Fe) — atomic number 26
-  atomic mass:       55.845
+  atomic mass:       55.845 u
   mass number:       56
-  electron config:   1s2 2s2 2p6 3s2 3p6 3d6 4s2
+  electron config:   1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁶ 4s²
   group / period:    8 / 4
   block:             d
   category:          TransitionMetal
   state (STP):       solid
-  melting point (K): 1811
-  boiling point (K): 3134
-  density (g/cm³):   7.874
+  melting point:     1811 K
+  boiling point:     3134 K
+  density:           7.874 g/cm³
   electronegativity: 1.83
   oxidation states:  2, 3
   discovered:        — (—)
@@ -179,6 +179,11 @@ Iron (Fe) — atomic number 26
 
 Unmeasured/unknown fields render as `—`. A `get` with no match exits non-zero with
 `error: no matching element found`.
+
+In `json`/`yaml` output, properties that carry a physical unit are emitted as a
+`{ value, unit }` object (e.g. `"atomic_mass": { "value": 55.845, "unit": "u" }`,
+units `u`, `K`, `g/cm³`); an unmeasured one collapses to `null`. Dimensionless
+fields (electronegativity, group, oxidation states, …) stay bare numbers.
 
 ---
 
@@ -237,24 +242,126 @@ required fields present.
 
 ---
 
+## How electron configuration is computed
+
+Electron configuration is **not** stored in the YAML — it is derived from the
+atomic number `Z` alone, in `pt-domain/src/config.rs`
+(`electron_configuration(z)`). The arrangement follows three physical rules plus
+a correction table.
+
+### 1. Aufbau principle — fill order (Madelung rule)
+
+Subshells fill from lowest energy upward. Energy is ordered by `n + l` (the
+**Madelung rule**), with ties broken by the lower principal number `n`. That
+gives a fixed sequence that the code hardcodes as `MADELUNG_ORDER`:
+
+```
+1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → 5s → 4d → 5p →
+6s → 4f → 5d → 6p → 7s → 5f → 6d → 7p
+```
+
+Note that `4s` comes **before** `3d`: `4s` has `n+l = 4+0 = 4` while `3d` has
+`3+2 = 5`, so the lower sum fills first.
+
+### 2. Pauli exclusion — subshell capacity
+
+Each subshell `l` holds at most `2·(2l + 1)` electrons (`Subshell::capacity`):
+
+| subshell | `l` | orbitals `2l+1` | capacity `2(2l+1)` |
+|----------|-----|-----------------|--------------------|
+| s        | 0   | 1               | 2                  |
+| p        | 1   | 3               | 6                  |
+| d        | 2   | 5               | 10                 |
+| f        | 3   | 7               | 14                 |
+
+`aufbau_fill(z)` walks the Madelung order and drops `min(remaining, capacity)`
+electrons into each subshell until all `Z` electrons are placed.
+
+### 3. Hund's rule — counting unpaired electrons
+
+Within one subshell, electrons singly occupy each orbital before any pairing
+begins. So for a subshell with `orbitals = 2l+1` slots holding `e` electrons
+(`ElectronConfiguration::unpaired_electrons`):
+
+```
+unpaired = e                 if e ≤ orbitals   (all still single)
+unpaired = 2·orbitals − e    if e >  orbitals   (the surplus pairs up)
+```
+
+### 4. Ground-state anomalies — the correction table
+
+The naive Aufbau fill is wrong for 19 real elements where a near-full or
+half-full d/f subshell is energetically favorable (e.g. chromium, copper, the
+lanthanide/actinide boundary). `anomalies(z)` lists the corrected absolute
+occupancies; `electron_configuration` overwrites the affected orbitals after the
+naive fill, and any orbital forced to `0` is dropped entirely (this is how
+palladium loses its `5s` electrons).
+
+### Worked example — iron (`Z = 26`)
+
+Fill in Madelung order, subtracting each subshell's electrons from the 26 total:
+
+| step | subshell | added | remaining |
+|------|----------|-------|-----------|
+| 1    | 1s       | 2     | 24        |
+| 2    | 2s       | 2     | 22        |
+| 3    | 2p       | 6     | 16        |
+| 4    | 3s       | 2     | 14        |
+| 5    | 3p       | 6     | 8         |
+| 6    | 4s       | 2     | 6         |
+| 7    | 3d       | 6     | 0 → stop  |
+
+Iron is not in the anomaly table, so the fill stands. The orbitals are *stored*
+in fill order (`… 4s² 3d⁶`), but are rendered in standard `(n, l)` order — the
+CLI prints each subshell's occupancy as a superscript:
+
+```
+1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁶ 4s²
+```
+
+Its `3d⁶` subshell (6 electrons in 5 orbitals) has `2·5 − 6 = 4` unpaired
+electrons.
+
+### Worked example — chromium (`Z = 24`), an anomaly
+
+Naive Aufbau would yield `… 3d⁴ 4s²`. The anomaly table overrides this to
+`3d⁵, 4s¹` (a half-filled `3d` is favored), producing:
+
+```
+1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁵ 4s¹
+```
+
+```mermaid
+flowchart LR
+    Z["atomic number Z"] --> AUF["aufbau_fill(z)<br/>Madelung order + Pauli capacity"]
+    AUF --> ANOM{"anomalies(z)?"}
+    ANOM -->|no| OUT["ElectronConfiguration"]
+    ANOM -->|yes| FIX["overwrite occupancies<br/>drop any → 0"]
+    FIX --> OUT
+    OUT -->|sorted by n, l; CLI superscripts occupancy| STR["1s² 2s² 2p⁶ …"]
+```
+
+---
+
 ## Property reference
 
-| Property | Source | Notes |
-|----------|--------|-------|
-| atomic_number, name, symbol | stored | identity / lookup keys |
-| atomic_mass, mass_number | stored | standard atomic weight (u) / representative isotope |
-| melting_point, boiling_point | stored | Kelvin; `null` when unmeasured |
-| density | stored | g/cm³ |
-| electronegativity | stored | Pauling scale; `null` for some elements |
-| state | stored | `solid` / `liquid` / `gas` at STP |
-| isotopes | stored | mass number, relative mass, abundance |
-| discovery_year, discoverer | stored | `null` for ancient/synthetic elements |
-| electron_configuration | **computed** | Aufbau (Madelung order) + Pauli capacities + ~19-element anomaly table |
-| group, period, block | **computed** | from the configuration (f-block → group 3 by convention) |
-| category | **computed** | heuristic (alkali metal, noble gas, metalloid, …) |
-| oxidation_states | **computed** | heuristic, group-based |
-| computed_atomic_mass | **computed** | abundance-weighted isotope mean |
-| state_at(T) | **computed** | from stored melting/boiling points |
+| Property | Source | Unit | Notes |
+|----------|--------|------|-------|
+| atomic_number, name, symbol | stored | — | identity / lookup keys |
+| atomic_mass | stored | u (unified atomic mass unit) | standard atomic weight |
+| mass_number | stored | — | nucleon count of the representative isotope |
+| melting_point, boiling_point | stored | K (kelvin) | `null` when unmeasured |
+| density | stored | g/cm³ | `null` when unmeasured |
+| electronegativity | stored | — (Pauling scale) | `null` for some elements |
+| state | stored | — | `solid` / `liquid` / `gas` at STP |
+| isotopes | stored | relative_mass: u; abundance: mole fraction | per isotope: mass number, relative mass, abundance |
+| discovery_year, discoverer | stored | — (calendar year) | `null` for ancient/synthetic elements |
+| electron_configuration | **computed** | — | Aufbau (Madelung order) + Pauli capacities + ~19-element anomaly table |
+| group, period, block | **computed** | — | from the configuration (f-block → group 3 by convention) |
+| category | **computed** | — | heuristic (alkali metal, noble gas, metalloid, …) |
+| oxidation_states | **computed** | — | heuristic, group-based signed charges |
+| computed_atomic_mass | **computed** | u | abundance-weighted isotope mean |
+| state_at(T) | **computed** | input T in K | from stored melting/boiling points |
 
 ### Caveats
 

@@ -19,7 +19,7 @@ fn get_by_symbol_prints_name_and_config() {
         .assert()
         .success()
         .stdout(contains("Iron"))
-        .stdout(contains("3d6 4s2"));
+        .stdout(contains("3d⁶ 4s²"));
 }
 
 #[test]
@@ -87,8 +87,38 @@ fn get_text_renders_null_fields_as_dash() {
         .assert()
         .success()
         .stdout(contains("Helium"))
-        .stdout(contains("melting point (K): —"))
+        .stdout(contains("melting point:     —"))
         .stdout(contains("Pierre Janssen"));
+}
+
+#[test]
+fn get_text_shows_units_on_values() {
+    pt().args(["get", "--symbol", "H"])
+        .assert()
+        .success()
+        .stdout(contains("atomic mass:       1.008 u"))
+        .stdout(contains("melting point:     13.99 K"))
+        .stdout(contains("density:           0.00008988 g/cm³"));
+}
+
+#[test]
+fn get_json_wraps_measurements_with_units() {
+    pt().args(["--format", "json", "get", "--number", "1"])
+        .assert()
+        .success()
+        .stdout(contains("\"atomic_mass\": {"))
+        .stdout(contains("\"value\": 1.008"))
+        .stdout(contains("\"unit\": \"u\""))
+        .stdout(contains("\"unit\": \"K\""));
+}
+
+#[test]
+fn get_json_collapses_absent_measurement_to_null() {
+    // Helium has no melting point.
+    pt().args(["--format", "json", "get", "--symbol", "He"])
+        .assert()
+        .success()
+        .stdout(contains("\"melting_point\": null"));
 }
 
 #[test]
