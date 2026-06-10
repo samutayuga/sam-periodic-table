@@ -22,11 +22,13 @@ derived at runtime from first principles.
 periodic-table/
 ├── Cargo.toml                 # workspace manifest
 ├── data/elements/*.yaml       # 118 element files (source of truth)
+├── pkg/pt-wasm/               # wasm-pack build output (gitignored)
 └── crates/
     ├── pt-domain/             # pure value types + stateless calculations
     ├── pt-data/               # YAML loading + indexed repository
     ├── pt-services/           # query API (PeriodicTable, ElementView)
-    └── pt-cli/                # the `pt` binary
+    ├── pt-cli/                # the `pt` binary
+    └── pt-wasm/               # WebAssembly wrapper (wasm-bindgen + tsify)
 ```
 
 Dependencies flow in one direction only:
@@ -34,20 +36,26 @@ Dependencies flow in one direction only:
 ```mermaid
 flowchart TD
     CLI["pt-cli<br/>(binary: pt)"] --> SVC["pt-services<br/>PeriodicTable · ElementView"]
+    WASM["pt-wasm<br/>wasm-bindgen wrappers"] --> SVC
     SVC --> DATA["pt-data<br/>ElementRepository · parsing · validation"]
     SVC --> DOM["pt-domain<br/>types · calculations"]
     DATA --> DOM
-    DATA -. reads .-> YAML[("data/elements/*.yaml")]
+    DATA -. reads at compile time .-> YAML[("data/elements/*.yaml")]
 ```
 
 - **`pt-domain`** — no I/O, no serialization. Defines `Element`, `Isotope`,
   `StateOfMatter` and the stateless calculation functions.
 - **`pt-data`** — owns serde DTOs, parses/validates YAML into domain types, and
   builds an in-memory `ElementRepository` (loaded once) indexed by atomic number,
-  symbol, and name.
+  symbol, and name. Under the `bundled` feature, a `build.rs` codegen step bakes
+  all 118 YAML files into the binary at compile time — no filesystem access at
+  runtime.
 - **`pt-services`** — the public query API. `PeriodicTable` looks elements up;
   `ElementView` merges an element's stored fields with its computed properties.
 - **`pt-cli`** — a thin binary named `pt` over `pt-services`.
+- **`pt-wasm`** — `wasm-bindgen` wrappers that expose `PeriodicTable` and all
+  element properties to JavaScript/TypeScript. Data is fully bundled; no YAML
+  files are shipped or read at runtime.
 
 ---
 
@@ -57,6 +65,22 @@ flowchart TD
 cargo build --workspace      # build everything
 cargo test --workspace       # run all unit + integration tests
 cargo run -p pt-cli -- --help
+```
+
+Build the WebAssembly module (requires [`wasm-pack`](https://rustwasm.github.io/wasm-pack/)):
+
+```bash
+wasm-pack build crates/pt-wasm --target bundler --out-dir ../../pkg/pt-wasm
+```
+
+Output lands in `pkg/pt-wasm/` (gitignored):
+
+```
+pkg/pt-wasm/
+├── pt_wasm_bg.wasm      # ~150 KB binary (all element data embedded)
+├── pt_wasm.js           # ESM glue
+├── pt_wasm.d.ts         # generated TypeScript types
+└── package.json
 ```
 
 ---
@@ -117,6 +141,74 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 Lookups return `Option<ElementView>` — `None` means "not found" (not an error).
 `PeriodicTable::load` returns `Result<_, ServiceError>`; loading fails only on I/O
 or data-validation problems.
+
+---
+
+## WebAssembly / JavaScript
+
+`pt-wasm` targets browser applications (React, Vite, etc.). All 118 element
+records are embedded in the WASM binary at compile time — no YAML files are
+shipped and no filesystem is required.
+
+### Vite setup
+
+Install the required plugins:
+
+```bash
+npm install --save-dev vite-plugin-wasm vite-plugin-top-level-await
+```
+
+```ts
+// vite.config.ts
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
+
+export default defineConfig({
+  plugins: [wasm(), topLevelAwait()],
+});
+```
+
+### Usage
+
+```typescript
+import init, { PeriodicTable } from '../pkg/pt-wasm';
+
+// init() is async (loads the .wasm binary); PeriodicTable.load() is synchronous.
+await init();
+const pt = PeriodicTable.load();
+
+const iron  = pt.by_symbol("Fe");          // WasmElement | undefined
+const all   = pt.all();                    // WasmElement[]
+const near  = pt.by_atomic_mass(55.845, 0.1);
+const state = pt.state_at("Fe", 1900);    // "Liquid" | null (temperature in K)
+const h     = pt.by_atomic_number(1);
+const gold  = pt.by_name("Gold");
+```
+
+### `WasmElement` fields
+
+Every lookup returns a flat `WasmElement` object with all stored and computed
+properties:
+
+| Field | Type | Source |
+|-------|------|--------|
+| `atomic_number` | `number` | stored |
+| `name`, `symbol` | `string` | stored |
+| `atomic_mass`, `mass_number` | `number` | stored |
+| `melting_point`, `boiling_point`, `density`, `electronegativity` | `number \| null` | stored |
+| `state` | `string` | stored (`"solid"` / `"liquid"` / `"gas"`) |
+| `discovery_year` | `number \| null` | stored |
+| `discoverer` | `string \| null` | stored |
+| `isotopes` | `WasmIsotope[]` | stored |
+| `electron_configuration` | `string` | computed |
+| `group`, `period` | `number` | computed |
+| `block` | `string` | computed (`"S"` / `"P"` / `"D"` / `"F"`) |
+| `category` | `string` | computed |
+| `oxidation_states` | `number[]` | computed |
+| `computed_atomic_mass` | `number \| null` | computed (isotope-weighted) |
+
+TypeScript interfaces for `WasmElement` and `WasmIsotope` are auto-generated
+by [`tsify`](https://github.com/nickel-lang/tsify) and shipped in `pt_wasm.d.ts`.
 
 ---
 
@@ -343,6 +435,115 @@ flowchart LR
 
 ---
 
+## How group and period are computed
+
+Like electron configuration, **group** and **period** are derived entirely from
+the atomic number `Z` — they are not stored in the YAML.
+
+### Period
+
+The period equals the **highest principal quantum number `n`** that appears in
+the (Aufbau) electron configuration:
+
+| Element | Config (abbreviated) | Highest n | Period |
+|---------|----------------------|-----------|--------|
+| Na (Z=11) | [Ne] 3s¹ | 3 | 3 |
+| Fe (Z=26) | [Ar] 3d⁶ 4s² | 4 | 4 |
+| Xe (Z=54) | [Kr] 4d¹⁰ 5p⁶ | 5 | 5 |
+
+### Group — main-group elements (s and p blocks)
+
+Group equals the **total number of valence electrons** (electrons in the
+outermost shell):
+
+| Block | Valence electrons | Group |
+|-------|-------------------|-------|
+| s | ns¹ | 1 |
+| s | ns² | 2 |
+| p | ns² np¹–⁶ | 13–18 (= 10 + valence count) |
+
+Examples: Cl has 7 valence electrons → Group 17. Ca has 2 → Group 2.
+
+### Group — transition metals (d block)
+
+Group equals **d electrons + outermost s electrons** for the neutral ground-state
+atom:
+
+```
+Fe: [Ar] 3d⁶ 4s²  →  6 + 2 = 8  →  Group 8
+Cu: [Ar] 3d¹⁰ 4s¹ →  10 + 1 = 11 → Group 11
+```
+
+Note that ground-state anomalies (e.g. Cu, Cr) are already reflected in the
+corrected configuration, so the same formula applies without special-casing.
+
+### Group — f block (lanthanides and actinides)
+
+Lanthanides and actinides are **not** assigned groups 1–18; they are placed
+outside the main table. By IUPAC convention the code maps them to **group 3**
+(their position in the d-block column from which they branch).
+
+### Summary
+
+```
+period = max(n) across all occupied subshells
+group  = valence e⁻ count          (s/p block)
+       = d e⁻ + outermost s e⁻     (d block)
+       = 3 by convention            (f block)
+```
+
+---
+
+## How element class is computed
+
+**Element class** (`Metal` / `NonMetal` / `Metalloid`) is a coarser grouping than
+`category`, designed for UI colour-coding. It is computed from the atomic number
+`Z` via `element_class(z)` in `pt-domain/src/classification.rs`.
+
+The function applies seven rules **in priority order**, returning on the first
+match:
+
+| Priority | Rule | Class |
+|----------|------|-------|
+| 1 | Z = 1 (hydrogen) | NonMetal |
+| 2 | Group 17 (halogens) or Group 18 (noble gases) | NonMetal |
+| 3 | Z 57–71 (lanthanides) or Z 89–103 (actinides) | Metal |
+| 4 | Z ∈ {5, 14, 32, 33, 51, 52, 84} — the metalloid staircase | Metalloid |
+| 5 | Period 2 and Group 14–16 (C, N, O) | NonMetal |
+| 6 | Period 3 and Group 15–16 (P, S) | NonMetal |
+| 7 | Period 4 and Group 16 (Se) | NonMetal |
+| default | everything else | Metal |
+
+### The metalloid staircase
+
+The 7 metalloids (B · Si · Ge · As · Sb · Te · Po) form a diagonal boundary
+between metals and non-metals on the periodic table. Elements above-left of this
+line that are not already caught by rules 1–2 are non-metals (C, N, O, P, S, Se);
+elements below-right default to metals.
+
+**Note:** the metalloid set used by `element_class` includes Po (Z=84) and
+excludes At (Z=85). At is caught earlier by the Group 17 (halogen) rule and
+classified as NonMetal. The existing `category()` function uses a different
+constant (`METALLOIDS`) that includes At — the two constants are intentionally
+distinct.
+
+### Relationship to `category`
+
+`category` is a finer-grained classification (AlkaliMetal, Halogen,
+TransitionMetal, Lanthanide, …). `element_class` collapses those into three
+broad groups:
+
+| Category values | ElementClass |
+|-----------------|--------------|
+| AlkaliMetal, AlkalineEarthMetal, TransitionMetal, PostTransitionMetal, Lanthanide, Actinide | Metal |
+| ReactiveNonmetal, Halogen, NobleGas | NonMetal |
+| Metalloid | Metalloid |
+
+The two are computed independently — a change to `category`'s logic does not
+affect `element_class`.
+
+---
+
 ## Property reference
 
 | Property | Source | Unit | Notes |
@@ -405,6 +606,8 @@ changes required.
 
 ## Documentation
 
-- Design spec: `docs/superpowers/specs/2026-05-29-periodic-table-design.md`
-- Implementation plan: `docs/superpowers/plans/2026-05-29-periodic-table.md`
+- Design spec (library): `docs/superpowers/specs/2026-05-29-periodic-table-design.md`
+- Implementation plan (library): `docs/superpowers/plans/2026-05-29-periodic-table.md`
+- Design spec (WASM): `docs/superpowers/specs/2026-06-10-pt-wasm-design.md`
+- Implementation plan (WASM): `docs/superpowers/plans/2026-06-10-pt-wasm.md`
 - API docs: `cargo doc --workspace --no-deps --open`
