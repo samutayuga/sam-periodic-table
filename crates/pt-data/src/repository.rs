@@ -41,8 +41,65 @@ impl ElementRepository {
             elements.push(parse_element_file(&path)?);
         }
 
+        Self::build_index(elements)
+    }
+
+    #[cfg(feature = "bundled")]
+    pub fn load_from_static(raw: &[crate::bundled::StaticElement]) -> Result<Self, DataError> {
+        use pt_domain::{Element, Isotope, StateOfMatter};
+
+        let elements: Result<Vec<Element>, DataError> = raw.iter().map(|r| {
+            if !(1..=118).contains(&r.atomic_number) {
+                return Err(DataError::Validation {
+                    file: r.name.to_string(),
+                    message: format!("atomic_number {} out of range 1..=118", r.atomic_number),
+                });
+            }
+            if !r.isotopes.is_empty() {
+                let sum: f64 = r.isotopes.iter().map(|i| i.abundance).sum();
+                if (sum - 1.0).abs() > 0.01 {
+                    return Err(DataError::Validation {
+                        file: r.name.to_string(),
+                        message: format!("isotope abundances sum to {sum:.4}, expected ~1.0"),
+                    });
+                }
+            }
+            let state = match r.state {
+                "solid" => StateOfMatter::Solid,
+                "liquid" => StateOfMatter::Liquid,
+                "gas" => StateOfMatter::Gas,
+                s => return Err(DataError::Validation {
+                    file: r.name.to_string(),
+                    message: format!("unknown state: {s}"),
+                }),
+            };
+            Ok(Element {
+                atomic_number: r.atomic_number,
+                name: r.name.to_string(),
+                symbol: r.symbol.to_string(),
+                atomic_mass: r.atomic_mass,
+                mass_number: r.mass_number,
+                melting_point: r.melting_point,
+                boiling_point: r.boiling_point,
+                density: r.density,
+                electronegativity: r.electronegativity,
+                state,
+                discovery_year: r.discovery_year,
+                discoverer: r.discoverer.map(|s| s.to_string()),
+                isotopes: r.isotopes.iter().map(|i| Isotope {
+                    mass_number: i.mass_number,
+                    relative_mass: i.relative_mass,
+                    abundance: i.abundance,
+                }).collect(),
+            })
+        }).collect();
+
+        Self::build_index(elements?)
+    }
+
+    fn build_index(mut elements: Vec<Element>) -> Result<Self, DataError> {
         if elements.is_empty() {
-            return Err(DataError::EmptyDataDir(dir.display().to_string()));
+            return Err(DataError::EmptyDataDir("(bundled)".to_string()));
         }
 
         elements.sort_by_key(|e| e.atomic_number);
@@ -62,12 +119,7 @@ impl ElementRepository {
             }
         }
 
-        Ok(Self {
-            elements,
-            by_number,
-            by_symbol,
-            by_name,
-        })
+        Ok(Self { elements, by_number, by_symbol, by_name })
     }
 
     pub fn get_by_atomic_number(&self, z: u8) -> Option<&Element> {
@@ -237,6 +289,127 @@ mod tests {
         );
         let err = ElementRepository::load_from_dir(dir.path()).unwrap_err();
         assert!(matches!(err, DataError::DuplicateName(_)));
+    }
+
+    #[cfg(feature = "bundled")]
+    #[test]
+    fn load_from_static_indexes_correctly() {
+        use crate::bundled::{StaticElement, StaticIsotope};
+
+        let elements = [
+            StaticElement {
+                atomic_number: 1,
+                name: "Hydrogen",
+                symbol: "H",
+                atomic_mass: 1.008,
+                mass_number: 1,
+                melting_point: Some(13.99),
+                boiling_point: Some(20.271),
+                density: Some(0.00008988),
+                electronegativity: Some(2.20),
+                state: "gas",
+                discovery_year: Some(1766),
+                discoverer: Some("Henry Cavendish"),
+                isotopes: &[
+                    StaticIsotope { mass_number: 1, relative_mass: 1.007825, abundance: 0.999885 },
+                    StaticIsotope { mass_number: 2, relative_mass: 2.014102, abundance: 0.000115 },
+                ],
+            },
+            StaticElement {
+                atomic_number: 26,
+                name: "Iron",
+                symbol: "Fe",
+                atomic_mass: 55.845,
+                mass_number: 56,
+                melting_point: Some(1811.0),
+                boiling_point: Some(3134.0),
+                density: Some(7.874),
+                electronegativity: Some(1.83),
+                state: "solid",
+                discovery_year: None,
+                discoverer: None,
+                isotopes: &[
+                    StaticIsotope { mass_number: 56, relative_mass: 55.934936, abundance: 1.0 },
+                ],
+            },
+        ];
+
+        let repo = ElementRepository::load_from_static(&elements).unwrap();
+        assert_eq!(repo.len(), 2);
+        assert_eq!(repo.get_by_atomic_number(26).unwrap().name, "Iron");
+        assert_eq!(repo.get_by_symbol("fe").unwrap().name, "Iron");
+        assert_eq!(repo.get_by_name("HYDROGEN").unwrap().symbol, "H");
+    }
+
+    #[cfg(feature = "bundled")]
+    #[test]
+    fn load_from_static_rejects_out_of_range_atomic_number() {
+        use crate::bundled::StaticElement;
+        let elements = [StaticElement {
+            atomic_number: 0,
+            name: "Bad",
+            symbol: "Bd",
+            atomic_mass: 1.0,
+            mass_number: 1,
+            melting_point: None,
+            boiling_point: None,
+            density: None,
+            electronegativity: None,
+            state: "solid",
+            discovery_year: None,
+            discoverer: None,
+            isotopes: &[],
+        }];
+        let err = ElementRepository::load_from_static(&elements).unwrap_err();
+        assert!(matches!(err, DataError::Validation { .. }));
+    }
+
+    #[cfg(feature = "bundled")]
+    #[test]
+    fn load_from_static_rejects_unknown_state() {
+        use crate::bundled::StaticElement;
+        let elements = [StaticElement {
+            atomic_number: 1,
+            name: "Hydrogen",
+            symbol: "H",
+            atomic_mass: 1.008,
+            mass_number: 1,
+            melting_point: None,
+            boiling_point: None,
+            density: None,
+            electronegativity: None,
+            state: "plasma",
+            discovery_year: None,
+            discoverer: None,
+            isotopes: &[],
+        }];
+        let err = ElementRepository::load_from_static(&elements).unwrap_err();
+        assert!(matches!(err, DataError::Validation { .. }));
+    }
+
+    #[cfg(feature = "bundled")]
+    #[test]
+    fn load_from_static_rejects_bad_abundance_sum() {
+        use crate::bundled::{StaticElement, StaticIsotope};
+        let elements = [StaticElement {
+            atomic_number: 1,
+            name: "Hydrogen",
+            symbol: "H",
+            atomic_mass: 1.008,
+            mass_number: 1,
+            melting_point: None,
+            boiling_point: None,
+            density: None,
+            electronegativity: None,
+            state: "gas",
+            discovery_year: None,
+            discoverer: None,
+            isotopes: &[
+                StaticIsotope { mass_number: 1, relative_mass: 1.007825, abundance: 0.5 },
+            ],
+        }];
+        let err = ElementRepository::load_from_static(&elements).unwrap_err();
+        assert!(matches!(err, DataError::Validation { .. }));
     }
 
     #[test]

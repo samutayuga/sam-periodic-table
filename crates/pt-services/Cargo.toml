@@ -7,3 +7,6 @@ version.workspace = true
 pt-domain = { workspace = true }
 pt-data = { workspace = true }
 thiserror = { workspace = true }
+
+[features]
+bundled = ["pt-data/bundled"]
