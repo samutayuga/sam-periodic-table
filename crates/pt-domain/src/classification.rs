@@ -39,6 +39,33 @@ pub enum Category {
     Actinide,
 }
 
+/// Broad three-way element classification used for UI colour-coding.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ElementClass {
+    Metal,
+    NonMetal,
+    Metalloid,
+}
+
+/// The 7 metalloids per spec: B Si Ge As Sb Te Po.
+/// Intentionally differs from METALLOIDS (used by category()) which has At(85) not Po(84).
+const CLASS_METALLOIDS: [u8; 7] = [5, 14, 32, 33, 51, 52, 84];
+
+/// Broad Metal / NonMetal / Metalloid classification derived from atomic number.
+pub fn element_class(z: u8) -> Result<ElementClass, DomainError> {
+    use ElementClass::*;
+    let g = group(z)?;
+    if z == 1             { return Ok(NonMetal); }
+    if g == 17 || g == 18 { return Ok(NonMetal); }
+    if (57..=71).contains(&z) || (89..=103).contains(&z) { return Ok(Metal); }
+    if CLASS_METALLOIDS.contains(&z) { return Ok(Metalloid); }
+    let p = period(z)?;
+    if p == 2 && (14..=16).contains(&g) { return Ok(NonMetal); }
+    if p == 3 && (15..=16).contains(&g) { return Ok(NonMetal); }
+    if p == 4 && g == 16  { return Ok(NonMetal); }
+    Ok(Metal)
+}
+
 const METALLOIDS: [u8; 7] = [5, 14, 32, 33, 51, 52, 85]; // B Si Ge As Sb Te At
 const POST_TRANSITION: [u8; 12] = [13, 31, 49, 50, 81, 82, 83, 84, 113, 114, 115, 116];
 
@@ -236,5 +263,60 @@ mod tests {
         assert_eq!(oxidation_states(7).unwrap().0, vec![-3, 3, 5]); // N (group 15)
         assert_eq!(oxidation_states(26).unwrap().0, vec![2, 3]); // Fe (transition)
         assert!(oxidation_states(0).is_err());
+    }
+
+    #[test]
+    fn element_class_hydrogen_exception() {
+        assert_eq!(element_class(1).unwrap(), ElementClass::NonMetal);
+    }
+
+    #[test]
+    fn element_class_halogens_and_noble_gases() {
+        assert_eq!(element_class(17).unwrap(), ElementClass::NonMetal); // Cl
+        assert_eq!(element_class(35).unwrap(), ElementClass::NonMetal); // Br
+        assert_eq!(element_class(2).unwrap(), ElementClass::NonMetal);  // He
+        assert_eq!(element_class(10).unwrap(), ElementClass::NonMetal); // Ne
+    }
+
+    #[test]
+    fn element_class_lanthanides_and_actinides() {
+        assert_eq!(element_class(57).unwrap(), ElementClass::Metal); // La
+        assert_eq!(element_class(71).unwrap(), ElementClass::Metal); // Lu
+        assert_eq!(element_class(89).unwrap(), ElementClass::Metal); // Ac
+        assert_eq!(element_class(92).unwrap(), ElementClass::Metal); // U
+        assert_eq!(element_class(103).unwrap(), ElementClass::Metal); // Lr
+    }
+
+    #[test]
+    fn element_class_metalloids() {
+        for &z in &[5u8, 14, 32, 33, 51, 52, 84] {
+            assert_eq!(element_class(z).unwrap(), ElementClass::Metalloid, "z={z}");
+        }
+        // At (85) is group 17 — non-metal, not metalloid
+        assert_eq!(element_class(85).unwrap(), ElementClass::NonMetal);
+    }
+
+    #[test]
+    fn element_class_nonmetals_above_staircase() {
+        assert_eq!(element_class(6).unwrap(), ElementClass::NonMetal);  // C  (period 2, group 14)
+        assert_eq!(element_class(7).unwrap(), ElementClass::NonMetal);  // N  (period 2, group 15)
+        assert_eq!(element_class(8).unwrap(), ElementClass::NonMetal);  // O  (period 2, group 16)
+        assert_eq!(element_class(15).unwrap(), ElementClass::NonMetal); // P  (period 3, group 15)
+        assert_eq!(element_class(16).unwrap(), ElementClass::NonMetal); // S  (period 3, group 16)
+        assert_eq!(element_class(34).unwrap(), ElementClass::NonMetal); // Se (period 4, group 16)
+    }
+
+    #[test]
+    fn element_class_metals() {
+        assert_eq!(element_class(11).unwrap(), ElementClass::Metal); // Na
+        assert_eq!(element_class(12).unwrap(), ElementClass::Metal); // Mg
+        assert_eq!(element_class(26).unwrap(), ElementClass::Metal); // Fe
+        assert_eq!(element_class(79).unwrap(), ElementClass::Metal); // Au
+    }
+
+    #[test]
+    fn element_class_invalid_z() {
+        assert!(element_class(0).is_err());
+        assert!(element_class(119).is_err());
     }
 }

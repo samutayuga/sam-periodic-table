@@ -11,6 +11,17 @@ pub struct WasmIsotope {
     pub abundance: f64,
 }
 
+/// Three-way element classification exposed to TypeScript as a union type.
+/// Never constructed in Rust; exists only for tsify to emit the TypeScript union in pt_wasm.d.ts.
+#[allow(dead_code)]
+#[derive(Serialize, Tsify)]
+#[tsify(into_wasm_abi)]
+pub enum WasmElementClass {
+    Metal,
+    NonMetal,
+    Metalloid,
+}
+
 #[derive(Serialize, Tsify)]
 #[tsify(into_wasm_abi)]
 pub struct WasmElement {
@@ -34,6 +45,7 @@ pub struct WasmElement {
     pub category: String,
     pub oxidation_states: Vec<i8>,
     pub computed_atomic_mass: Option<f64>,
+    pub class: String,
 }
 
 impl From<ElementView<'_>> for WasmElement {
@@ -68,6 +80,7 @@ impl From<ElementView<'_>> for WasmElement {
             category: format!("{:?}", view.category()),
             oxidation_states: view.oxidation_states().0,
             computed_atomic_mass: view.computed_atomic_mass(),
+            class: format!("{:?}", view.element_class()),
         }
     }
 }
@@ -123,6 +136,7 @@ mod tests {
         assert_eq!(w.category, "TransitionMetal");
         assert_eq!(w.oxidation_states, vec![2i8, 3i8]);
         assert!(w.electron_configuration.contains("3d6"));
+        assert_eq!(w.class, "Metal");
     }
 
     #[test]

@@ -389,6 +389,34 @@ mod tests {
 
     #[cfg(feature = "bundled")]
     #[test]
+    fn load_from_static_handles_liquid_state() {
+        use crate::bundled::StaticElement;
+        use pt_domain::StateOfMatter;
+
+        let elements = [StaticElement {
+            atomic_number: 80,
+            name: "Mercury",
+            symbol: "Hg",
+            atomic_mass: 200.59,
+            mass_number: 202,
+            melting_point: Some(234.32),
+            boiling_point: Some(629.88),
+            density: Some(13.534),
+            electronegativity: Some(2.00),
+            state: "liquid",
+            discovery_year: None,
+            discoverer: None,
+            isotopes: &[],
+        }];
+        let repo = ElementRepository::load_from_static(&elements).unwrap();
+        assert!(matches!(
+            repo.get_by_symbol("hg").unwrap().state,
+            StateOfMatter::Liquid
+        ));
+    }
+
+    #[cfg(feature = "bundled")]
+    #[test]
     fn load_from_static_rejects_bad_abundance_sum() {
         use crate::bundled::{StaticElement, StaticIsotope};
         let elements = [StaticElement {
