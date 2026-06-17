@@ -19,6 +19,13 @@ impl PeriodicTable {
         })
     }
 
+    #[cfg(feature = "bundled")]
+    pub fn load_bundled() -> Result<Self, ServiceError> {
+        Ok(Self {
+            repo: pt_data::load_bundled()?,
+        })
+    }
+
     pub fn by_atomic_number(&self, z: u8) -> Option<ElementView<'_>> {
         self.repo.get_by_atomic_number(z).map(ElementView::new)
     }
@@ -46,5 +53,25 @@ impl PeriodicTable {
 
     pub fn all(&self) -> impl Iterator<Item = ElementView<'_>> {
         self.repo.iter().map(ElementView::new)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[cfg(feature = "bundled")]
+    #[test]
+    fn load_bundled_returns_118_elements() {
+        let pt = PeriodicTable::load_bundled().unwrap();
+        assert_eq!(pt.all().count(), 118);
+    }
+
+    #[cfg(feature = "bundled")]
+    #[test]
+    fn load_bundled_lookup_by_symbol() {
+        let pt = PeriodicTable::load_bundled().unwrap();
+        let gold = pt.by_symbol("Au").unwrap();
+        assert_eq!(gold.element().atomic_number, 79);
     }
 }

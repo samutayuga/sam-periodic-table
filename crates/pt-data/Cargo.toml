@@ -9,5 +9,12 @@ serde = { workspace = true }
 serde_yaml_ng = { workspace = true }
 thiserror = { workspace = true }
 
+[features]
+bundled = []
+
+[build-dependencies]
+serde = { workspace = true }
+serde_yaml_ng = { workspace = true }
+
 [dev-dependencies]
 tempfile = { workspace = true }

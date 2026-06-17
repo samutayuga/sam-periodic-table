@@ -8,7 +8,8 @@ pub mod error;
 
 pub use calc::{atomic_mass_from_isotopes, isotope_mass_matches, state_at};
 pub use classification::{
-    block, category, group, oxidation_states, period, Block, Category, OxidationStates,
+    block, category, element_class, group, oxidation_states, period,
+    Block, Category, ElementClass, OxidationStates,
 };
 pub use config::{electron_configuration, ElectronConfiguration, Orbital, Subshell};
 pub use element::{Element, Isotope, StateOfMatter};

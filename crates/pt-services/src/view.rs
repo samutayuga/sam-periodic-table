@@ -1,7 +1,8 @@
 //! A borrowed view over a stored element that also exposes computed properties.
 
 use pt_domain::{
-    self as domain, Block, Category, ElectronConfiguration, Element, OxidationStates, StateOfMatter,
+    self as domain, Block, Category, ElectronConfiguration, Element, ElementClass,
+    OxidationStates, StateOfMatter,
 };
 
 /// Combines an element's stored data with its computed properties.
@@ -43,6 +44,10 @@ impl<'a> ElementView<'a> {
 
     pub fn oxidation_states(&self) -> OxidationStates {
         domain::oxidation_states(self.element.atomic_number).expect("valid atomic number")
+    }
+
+    pub fn element_class(&self) -> ElementClass {
+        domain::element_class(self.element.atomic_number).expect("valid atomic number")
     }
 
     /// Atomic mass recomputed from the stored isotopes, if any.
@@ -96,5 +101,12 @@ mod tests {
             view.electron_configuration().to_string(),
             "1s2 2s2 2p6 3s2 3p6 3d6 4s2"
         );
+    }
+
+    #[test]
+    fn exposes_element_class() {
+        let e = iron();
+        let view = ElementView::new(&e);
+        assert_eq!(view.element_class(), pt_domain::ElementClass::Metal);
     }
 }
