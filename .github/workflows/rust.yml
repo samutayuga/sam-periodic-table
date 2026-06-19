@@ -1,0 +1,45 @@
+name: learn-periodic-table
+
+on:
+  push:
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: taiki-e/install-action@cargo-llvm-cov
+    - name: Lint
+      run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+    - name: Run tests with coverage
+      run: cargo llvm-cov --workspace --lcov --output-path lcov.info
+    - name: Generate HTML report
+      run: cargo llvm-cov report --html
+    - name: Coverage summary
+      run: cargo llvm-cov report --summary-only >> $GITHUB_STEP_SUMMARY
+    - name: Upload HTML coverage artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage
+        path: target/llvm-cov/html
+
+  release-please:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+    - uses: googleapis/release-please-action@v4
+      with:
+        release-type: rust
+

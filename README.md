@@ -85,6 +85,51 @@ pkg/pt-wasm/
 
 ---
 
+## CI/CD pipeline
+
+The workflow is defined in `.github/workflows/rust.yml` and runs on every push
+to any branch, plus every pull request targeting `main`.
+
+### Jobs
+
+```
+push (any branch) / PR → main
+        │
+        ▼
+    [ build ]
+    ├── pin toolchain  (dtolnay/rust-toolchain@stable)
+    ├── install cargo-llvm-cov
+    ├── lint           (cargo clippy --workspace --all-targets --all-features -D warnings)
+    ├── test + coverage (cargo llvm-cov --html --workspace)
+    └── upload HTML coverage artifact
+        │
+        └─ (main branch only)
+               ▼
+        [ release-please ]
+        opens / updates a Release PR that bumps Cargo.toml
+        and generates CHANGELOG.md; merging that PR publishes
+        a GitHub release.
+```
+
+### Release flow
+
+Releases are fully automated via
+[release-please](https://github.com/googleapis/release-please).
+Commit messages on `main` drive version bumps:
+
+| Prefix | Version bump | Example |
+|--------|-------------|---------|
+| `feat!:` or `BREAKING CHANGE:` in body | major (`1.0.0 → 2.0.0`) | `feat!: redesign API` |
+| `feat:` | minor (`1.0.0 → 1.1.0`) | `feat: add state_at lookup` |
+| `fix:` | patch (`1.0.0 → 1.0.1`) | `fix: correct Cr anomaly` |
+| `chore:` | no release | `chore: update deps` |
+
+On each merge to `main` the bot opens (or updates) a Release PR. Merging that
+PR creates the GitHub release and git tag automatically — no manual version
+bumping required.
+
+---
+
 ## User guide (library)
 
 The crates are path/workspace members and are not published to crates.io. To use
