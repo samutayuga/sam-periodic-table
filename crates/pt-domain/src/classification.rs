@@ -55,14 +55,28 @@ const CLASS_METALLOIDS: [u8; 7] = [5, 14, 32, 33, 51, 52, 84];
 pub fn element_class(z: u8) -> Result<ElementClass, DomainError> {
     use ElementClass::*;
     let g = group(z)?;
-    if z == 1             { return Ok(NonMetal); }
-    if g == 17 || g == 18 { return Ok(NonMetal); }
-    if (57..=71).contains(&z) || (89..=103).contains(&z) { return Ok(Metal); }
-    if CLASS_METALLOIDS.contains(&z) { return Ok(Metalloid); }
+    if z == 1 {
+        return Ok(NonMetal);
+    }
+    if g == 17 || g == 18 {
+        return Ok(NonMetal);
+    }
+    if (57..=71).contains(&z) || (89..=103).contains(&z) {
+        return Ok(Metal);
+    }
+    if CLASS_METALLOIDS.contains(&z) {
+        return Ok(Metalloid);
+    }
     let p = period(z)?;
-    if p == 2 && (14..=16).contains(&g) { return Ok(NonMetal); }
-    if p == 3 && (15..=16).contains(&g) { return Ok(NonMetal); }
-    if p == 4 && g == 16  { return Ok(NonMetal); }
+    if p == 2 && (14..=16).contains(&g) {
+        return Ok(NonMetal);
+    }
+    if p == 3 && (15..=16).contains(&g) {
+        return Ok(NonMetal);
+    }
+    if p == 4 && g == 16 {
+        return Ok(NonMetal);
+    }
     Ok(Metal)
 }
 
@@ -274,7 +288,7 @@ mod tests {
     fn element_class_halogens_and_noble_gases() {
         assert_eq!(element_class(17).unwrap(), ElementClass::NonMetal); // Cl
         assert_eq!(element_class(35).unwrap(), ElementClass::NonMetal); // Br
-        assert_eq!(element_class(2).unwrap(), ElementClass::NonMetal);  // He
+        assert_eq!(element_class(2).unwrap(), ElementClass::NonMetal); // He
         assert_eq!(element_class(10).unwrap(), ElementClass::NonMetal); // Ne
     }
 
@@ -298,9 +312,9 @@ mod tests {
 
     #[test]
     fn element_class_nonmetals_above_staircase() {
-        assert_eq!(element_class(6).unwrap(), ElementClass::NonMetal);  // C  (period 2, group 14)
-        assert_eq!(element_class(7).unwrap(), ElementClass::NonMetal);  // N  (period 2, group 15)
-        assert_eq!(element_class(8).unwrap(), ElementClass::NonMetal);  // O  (period 2, group 16)
+        assert_eq!(element_class(6).unwrap(), ElementClass::NonMetal); // C  (period 2, group 14)
+        assert_eq!(element_class(7).unwrap(), ElementClass::NonMetal); // N  (period 2, group 15)
+        assert_eq!(element_class(8).unwrap(), ElementClass::NonMetal); // O  (period 2, group 16)
         assert_eq!(element_class(15).unwrap(), ElementClass::NonMetal); // P  (period 3, group 15)
         assert_eq!(element_class(16).unwrap(), ElementClass::NonMetal); // S  (period 3, group 16)
         assert_eq!(element_class(34).unwrap(), ElementClass::NonMetal); // Se (period 4, group 16)
